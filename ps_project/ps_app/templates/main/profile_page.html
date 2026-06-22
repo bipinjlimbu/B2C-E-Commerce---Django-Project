@@ -31,8 +31,10 @@
                         <h1 class="text-2xl font-black tracking-tight text-white">
                             {% if user.first_name or user.last_name %}
                                 {{ user.first_name }} {{ user.last_name }}
+                            {% elif user.is_staff %}
+                                Administrator
                             {% else %}
-                                Anonymous Creator
+                                Anonymous User
                             {% endif %}
                         </h1>
                         <p class="text-sm font-mono text-red-500">@{{ user.username|default:"dummy_creator" }}</p>
