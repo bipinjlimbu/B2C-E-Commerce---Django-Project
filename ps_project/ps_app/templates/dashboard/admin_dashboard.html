@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Terminal | PixelShot</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+
+<body class="bg-white flex min-h-screen overflow-hidden text-neutral-900">
+
+    <aside class="w-80 bg-black text-white flex flex-col shadow-2xl relative z-30 border-r border-neutral-800">
+        <div class="p-8 border-b border-neutral-800">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-500/20">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+                </div>
+                <h1 class="text-2xl font-black italic tracking-tighter uppercase">
+                    Pixel<span class="text-red-500">Shot</span>
+                </h1>
+            </div>
+            <p class="text-[10px] text-neutral-500 font-black uppercase tracking-[0.3em] mt-4 italic">Management Console</p>
+        </div>
+
+        <nav class="flex-grow p-6 space-y-6 overflow-y-auto custom-scrollbar">
+            
+            <div class="space-y-2">
+                <h3 class="px-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-4 italic">Identity Control</h3>
+                
+                <a href="?section=customer-list" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'customer-list' or not section %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="users" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Customer Directory
+                </a>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="px-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-4 italic">Catalog Architecture</h3>
+                
+                <a href="?section=product-management" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'product-management' %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="aperture" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Product Master
+                </a>
+
+                <a href="?section=brand-management" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'brand-management' %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="tag" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Brand Control
+                </a>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="px-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-4 italic">Orders & Logistics</h3>
+                
+                <a href="?section=order-fulfillment" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'order-fulfillment' %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="truck" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Order Fulfillment
+                    {% if pending_orders_count > 0 %}
+                        <span class="ml-auto bg-white/20 text-white px-2 py-0.5 rounded-lg text-[10px] font-mono"> {{ pending_orders_count }}</span>
+                    {% endif %}
+                </a>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="px-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-4 italic">Platform Audit</h3>
+                
+                <a href="?section=product-reviews" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'product-reviews' %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="package" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Product Reviews
+                </a>
+                
+                <a href="?section=revenue-logs" class="flex items-center gap-4 px-4 py-4 rounded-2xl {% if section == 'revenue-logs' %}bg-red-600 text-white shadow-lg{% else %}text-neutral-400 hover:bg-neutral-900 hover:text-white{% endif %} font-black italic uppercase text-xs tracking-widest transition-all group">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    Revenue Logs
+                </a>
+            </div>
+        </nav>
+
+        <div class="p-6 border-t border-neutral-800 bg-neutral-950 flex flex-col gap-2">
+            <a href="/profile/" 
+               class="flex items-center justify-center gap-3 w-full bg-red-600 text-white px-6 py-4 rounded-2xl font-black italic uppercase text-[10px] tracking-widest hover:bg-red-700 transition-all shadow-lg shadow-red-600/20 active:scale-95">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Admin Profile
+            </a>
+
+            <a href="/" target="_blank" 
+               class="flex items-center justify-center gap-3 w-full bg-neutral-900 border border-neutral-800 text-neutral-400 px-6 py-4 rounded-2xl font-black italic uppercase text-[10px] tracking-widest hover:bg-neutral-800 hover:text-white transition-all active:scale-95">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+                Live Website
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-grow flex flex-col h-screen overflow-y-auto bg-white p-6 sm:p-8">
+        
+        {% if section == 'customer-list' or not section %}
+            {% include 'dashboard/admin/_customer_list.html' %}
+
+        {% elif section == 'product-management' %}
+            {% include 'dashboard/admin/_product_management.html' %}
+
+        {% elif section == 'brand-management' %}
+            {% include 'dashboard/admin/_brand_management.html' %}
+
+        {% elif section == 'order-fulfillment' %}
+            {% include 'dashboard/admin/_order_fulfillment.html' %}
+            
+        {% elif section == 'product-reviews' %}
+            {% include 'dashboard/admin/_product_reviews.html' %}
+
+        {% elif section == 'revenue-logs' %}
+            {% include 'dashboard/admin/_revenue_logs.html' %}
+
+        {% endif %}
+
+    </main>
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

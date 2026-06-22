@@ -1,0 +1,65 @@
+<div class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Identity Infrastructure</h2>
+            <h1 class="text-2xl font-black text-neutral-900 tracking-tight">Customer Directory</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="bg-black text-white px-4 py-2.5 rounded-xl border border-neutral-800 text-xs font-bold font-mono">
+                Total Users: 12
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-black border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-neutral-800 text-[10px] font-bold uppercase tracking-widest text-neutral-400 bg-neutral-950/50">
+                        <th class="p-4 pl-6">Customer Identity</th>
+                        <th class="p-4">Email Coordinates</th>
+                        <th class="p-4">Phone Link</th>
+                        <th class="p-4">Logistics Drop Terminal</th>
+                        <th class="p-4">Status State</th>
+                        <th class="p-4 pr-6 text-right">System Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
+                    {% for i in "x"|rjust:"12" %}
+                        <tr class="hover:bg-neutral-900/30 transition-colors">
+                            <td class="p-4 pl-6 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center text-neutral-500 shrink-0">
+                                    <i data-lucide="user" class="w-4 h-4 text-neutral-400"></i>
+                                </div>
+                                <div>
+                                    <span class="text-white block font-bold">Bipin Limbu</span>
+                                    <span class="text-[11px] font-mono text-red-500 block">@bipin7</span>
+                                </div>
+                            </td>
+                            <td class="p-4 font-normal text-neutral-400">bipin@gmail.com</td>
+                            <td class="p-4 font-mono text-xs">987545678</td>
+                            <td class="p-4 text-xs max-w-xs truncate">Sundarharaicha, Morang</td>
+                            <td class="p-4">
+                                <span class="inline-flex items-center gap-1 bg-green-500/10 text-green-400 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-green-500/20 tracking-wider">
+                                    Active
+                                </span>
+                            </td>
+                            <td class="p-4 pr-6 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <!-- Suspend Control Button -->
+                                    <button title="Suspend Account" class="p-2 bg-neutral-900 hover:bg-amber-500/10 text-neutral-400 hover:text-amber-500 rounded-xl border border-neutral-800 hover:border-amber-500/20 transition-all">
+                                        <i data-lucide="ban" class="w-4 h-4"></i>
+                                    </button>
+                                    <!-- Delete Control Button -->
+                                    <button title="Delete Operator" class="p-2 bg-neutral-900 hover:bg-red-600/20 text-neutral-400 hover:text-red-500 rounded-xl border border-neutral-800 hover:border-red-600/30 transition-all">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
