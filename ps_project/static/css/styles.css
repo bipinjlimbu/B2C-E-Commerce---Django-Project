@@ -416,7 +416,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.translate-x-1, .-translate-y-1, .rotate-6, .transform, .group-hover\:scale-105 {
+.translate-x-1, .-translate-y-1, .rotate-6, .transform, .group-hover\:rotate-12, .group-hover\:scale-105 {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -837,6 +837,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .resize-none {
   resize: none;
 }
@@ -1175,6 +1179,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
 }
 
 .bg-\[radial-gradient\(\#e5e7eb_1px\2c transparent_1px\)\] {
@@ -1571,12 +1579,30 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-underline-offset: 4px;
 }
 
+.placeholder-neutral-700::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(64 64 64 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-neutral-700::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(64 64 64 / var(--tw-placeholder-opacity));
+}
+
 .opacity-10 {
   opacity: 0.1;
 }
 
 .opacity-20 {
   opacity: 0.2;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
 .shadow-sm {
@@ -1627,6 +1653,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .transition-transform {
   transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-opacity {
+  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1710,6 +1742,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .file\:text-white::file-selector-button {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.focus-within\:border-red-600:focus-within {
+  --tw-border-opacity: 1;
+  border-color: rgb(220 38 38 / var(--tw-border-opacity));
 }
 
 .hover\:border-red-600:hover {
@@ -1803,6 +1840,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-color: rgb(220 38 38 / var(--tw-ring-opacity));
 }
 
+.group:hover .group-hover\:rotate-12 {
+  --tw-rotate: 12deg;
+  transform: var(--tw-transform);
+}
+
 .group:hover .group-hover\:scale-105 {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -1827,6 +1869,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .group:hover .group-hover\:text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
 }
 
 @media (min-width: 640px) {
