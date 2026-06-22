@@ -50,3 +50,10 @@ def edit_profile_view(request):
         return redirect('/profile/')
         
     return render(request, 'main/edit_profile_page.html')
+
+@login_required
+def delete_profile_view(request):
+    user = request.user
+    user.delete()
+    messages.success(request, 'Your profile has been deleted.')
+    return redirect('/')
