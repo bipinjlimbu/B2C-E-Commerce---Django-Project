@@ -1,0 +1,75 @@
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50 font-sans text-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            
+            <div class="flex items-center gap-8">
+                <a href="/" class="flex items-center gap-2 text-xl font-black tracking-tight shrink-0">
+                    <i data-lucide="camera" class="w-6 h-6 text-red-600 stroke-[2.5]"></i>
+                    <span>PIXEL<span class="text-red-600">SHOT</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-600">
+                    <a href="/products/" class="hover:text-red-600 transition-colors">Shop All</a>
+                    <a href="/products/?category=cameras" class="hover:text-red-600 transition-colors">Cameras</a>
+                    <a href="/products/?category=lenses" class="hover:text-red-600 transition-colors">Lenses</a>
+                    <a href="/products/?category=accessories" class="hover:text-red-600 transition-colors">Accessories</a>
+                </div>
+            </div>
+
+            <div class="flex-1 max-w-md mx-6 hidden sm:block">
+                <form action="/products/" method="GET" class="relative">
+                    <input type="text" name="search" placeholder="Search premium gear..." 
+                        class="w-full bg-neutral-50 border border-gray-300 rounded-xl pl-4 pr-9 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:bg-white transition-all">
+                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-400 hover:text-red-600">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="/wishlist/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                </a>
+
+                <a href="/cart/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    {% if user.is_authenticated and user.cart_items.exists %}
+                        <span class="absolute top-0 right-0 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                            {{ user.cart_items.count }}
+                        </span>
+                    {% endif %}
+                </a>
+
+                <div class="h-6 w-[1px] bg-gray-200"></div>
+
+                {% if user.is_authenticated %}
+                    <div class="flex items-center gap-3">
+                        <a href="/profile/" class="flex items-center gap-2 group">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Profile" class="w-8 h-8 rounded-full object-cover border border-gray-200 group-hover:border-red-600 transition-colors">
+                            {% else %}
+                                <div class="w-8 h-8 rounded-full bg-neutral-100 border border-gray-200 flex items-center justify-center text-neutral-500 group-hover:border-red-600 transition-colors">
+                                    <i data-lucide="user" class="w-4 h-4"></i>
+                                </div>
+                            {% endif %}
+                            <span class="text-sm font-semibold hidden lg:block group-hover:text-red-600 transition-colors">{{ user.username }}</span>
+                        </a>
+                        
+                        <form action="/logout/" method="POST" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="p-1.5 text-neutral-400 hover:text-red-600 transition-colors" title="Log Out">
+                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="flex items-center gap-3 text-sm font-bold">
+                        <a href="/login/" class="text-neutral-600 hover:text-black transition-colors px-2 py-1.5">Sign In</a>
+                        <a href="/register/" class="bg-neutral-900 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition-all shadow-sm">Register</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</nav>
