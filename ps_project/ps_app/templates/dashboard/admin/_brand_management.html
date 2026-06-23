@@ -5,6 +5,9 @@
             <h1 class="text-2xl font-black text-neutral-900 tracking-tight">Brand Control</h1>
         </div>
         <div class="flex items-center gap-3">
+            <div class="bg-black text-white px-4 py-2.5 rounded-xl border border-neutral-800 text-xs font-bold font-mono">
+                Total Brands: {{ brands|length|default:"0" }}
+            </div>
             <a href="/brands/add/" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-red-600/10 active:scale-95">
                 <i data-lucide="plus" class="w-4 h-4"></i>
                 Add New Brand
@@ -18,30 +21,31 @@
                 <thead>
                     <tr class="border-b border-neutral-800 text-[10px] font-bold uppercase tracking-widest text-neutral-400 bg-neutral-950/50">
                         <th class="p-4 pl-6">Brand Log</th>
-                        <th class="p-4">Slug Identification</th>
-                        <th class="p-4">Total Products Loaded</th>
-                        <th class="p-4">Performance State</th>
+                        <th class="p-4">Products Linked</th>
+                        <th class="p-4">Registration Identity</th>
                         <th class="p-4 pr-6 text-right">System Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
-                    {% for i in "x"|rjust:"12" %}
+                    {% for brand in brands %}
                         <tr class="hover:bg-neutral-900/30 transition-colors">
                             <td class="p-4 pl-6 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center text-white font-black italic tracking-tighter text-xs shrink-0">
-                                    SONY
+                                <div class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center shrink-0">
+                                    {% if brand.logo %}
+                                        <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" class="w-full h-full object-contain p-1">
+                                    {% else %}
+                                        <i data-lucide="image" class="w-4 h-4 text-neutral-600"></i>
+                                    {% endif %}
                                 </div>
                                 <div>
-                                    <span class="text-white block font-bold">Sony Corporation</span>
-                                    <span class="text-[11px] font-mono text-neutral-500 block">Premium Imaging</span>
+                                    <span class="text-white block font-bold">{{ brand.name }}</span>
                                 </div>
                             </td>
-                            <td class="p-4 font-mono text-xs text-red-500">sony</td>
-                            <td class="p-4 font-mono text-sm text-neutral-300">42 Products</td>
-                            <td class="p-4">
-                                <span class="inline-flex items-center gap-1 bg-green-500/10 text-green-400 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-green-500/20 tracking-wider">
-                                    Active
-                                </span>
+                            <td class="p-4 font-mono text-sm text-neutral-300">
+                                {{ brand.product_set.count|default:"0" }} Products
+                            </td>
+                            <td class="p-4 font-mono text-xs text-neutral-500">
+                                {{ brand.created_at|date:"Y-m-d H:i" }}
                             </td>
                             <td class="p-4 pr-6 text-right">
                                 <div class="flex items-center justify-end gap-2">
