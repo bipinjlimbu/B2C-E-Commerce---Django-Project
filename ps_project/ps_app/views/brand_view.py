@@ -58,3 +58,14 @@ def edit_brand_view(request, brand_id):
         return redirect('/dashboard/admin/?section=brand-management')
     
     return render(request, 'main/edit_brands_page.html', {'brand': brand})
+
+@login_required
+def delete_brand_view(request, brand_id):
+    try:
+        brand = Brand.objects.get(id=brand_id)
+        brand.delete()
+        messages.success(request, 'Brand deleted successfully.')
+    except Brand.DoesNotExist:
+        messages.error(request, 'Brand not found.')
+    
+    return redirect('/dashboard/admin/?section=brand-management')
