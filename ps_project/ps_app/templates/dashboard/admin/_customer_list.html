@@ -6,7 +6,7 @@
         </div>
         <div class="flex items-center gap-3">
             <div class="bg-black text-white px-4 py-2.5 rounded-xl border border-neutral-800 text-xs font-bold font-mono">
-                Total Users: 12
+                Total Users: {{ customers|length|default:"0" }}
             </div>
         </div>
     </div>
@@ -25,20 +25,24 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
-                    {% for i in "x"|rjust:"12" %}
+                    {% for customer in customers %}
                         <tr class="hover:bg-neutral-900/30 transition-colors">
                             <td class="p-4 pl-6 flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center text-neutral-500 shrink-0">
-                                    <i data-lucide="user" class="w-4 h-4 text-neutral-400"></i>
+                                    {% if customer.profile_picture %}
+                                        <img src="{{ customer.profile_picture.url }}" alt="{{ customer.first_name }}" class="w-full h-full object-cover">
+                                    {% else %}
+                                        <i data-lucide="user" class="w-4 h-4 text-neutral-400"></i>
+                                    {% endif %}
                                 </div>
                                 <div>
-                                    <span class="text-white block font-bold">Bipin Limbu</span>
-                                    <span class="text-[11px] font-mono text-red-500 block">@bipin7</span>
+                                    <span class="text-white block font-bold">{{ customer.first_name }} {{ customer.last_name }}</span>
+                                    <span class="text-[11px] font-mono text-red-500 block">@{{ customer.username }}</span>
                                 </div>
                             </td>
-                            <td class="p-4 font-normal text-neutral-400">bipin@gmail.com</td>
-                            <td class="p-4 font-mono text-xs">987545678</td>
-                            <td class="p-4 text-xs max-w-xs truncate">Sundarharaicha, Morang</td>
+                            <td class="p-4 font-normal text-neutral-400">{{ customer.email }}</td>
+                            <td class="p-4 font-mono text-xs">{{ customer.phone }}</td>
+                            <td class="p-4 text-xs max-w-xs truncate">{{ customer.address }}</td>
                             <td class="p-4">
                                 <span class="inline-flex items-center gap-1 bg-green-500/10 text-green-400 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-green-500/20 tracking-wider">
                                     Active
@@ -46,11 +50,9 @@
                             </td>
                             <td class="p-4 pr-6 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <!-- Suspend Control Button -->
                                     <button title="Suspend Account" class="p-2 bg-neutral-900 hover:bg-amber-500/10 text-neutral-400 hover:text-amber-500 rounded-xl border border-neutral-800 hover:border-amber-500/20 transition-all">
                                         <i data-lucide="ban" class="w-4 h-4"></i>
                                     </button>
-                                    <!-- Delete Control Button -->
                                     <button title="Delete Operator" class="p-2 bg-neutral-900 hover:bg-red-600/20 text-neutral-400 hover:text-red-500 rounded-xl border border-neutral-800 hover:border-red-600/30 transition-all">
                                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                                     </button>
