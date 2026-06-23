@@ -52,8 +52,16 @@ def edit_profile_view(request):
     return render(request, 'main/edit_profile_page.html')
 
 @login_required
-def delete_profile_view(request):
-    user = request.user
+def delete_profile_view(request, user_id):
+    if request.user.id != user_id and not request.user.is_staff:
+        messages.error(request, 'You are not authorized to delete this profile.')
+        return redirect('/')
+    
+    user = User.objects.get(id=user_id)
     user.delete()
     messages.success(request, 'Your profile has been deleted.')
-    return redirect('/')
+    
+    if request.user.is_staff:
+        return redirect('/dashboard/admin/?section=customer-list')
+    else:
+        return redirect('/')
