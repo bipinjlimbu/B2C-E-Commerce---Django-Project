@@ -58,16 +58,14 @@
                         <i data-lucide="edit-3" class="w-4 h-4"></i>
                         Edit Profile
                     </a>
-
-                    <a href="/profile/delete/{{ user.id }}/" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-red-600/10">
-                        <i data-lucide="trash" class="w-4 h-4"></i>
-                        Delete Account
-                    </a>
                     
-                    <a href="/logout/" class="w-full bg-transparent hover:bg-red-600/10 text-neutral-400 hover:text-red-400 font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm">
-                        <i data-lucide="log-out" class="w-4 h-4"></i>
-                        Log Out
-                    </a>
+                    {% if not user.is_staff %}
+                        <a href="/profile/delete/{{ user.id }}/" class="w-full bg-transparent hover:bg-red-600/10 text-neutral-400 hover:text-red-400 font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm">
+                            <i data-lucide="trash" class="w-4 h-4"></i>
+                            Delete Account
+                        </a>
+                    {% endif %}
+                    
                 </div>
             </div>
 
