@@ -27,18 +27,21 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <a href="/wishlist/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
-                    <i data-lucide="heart" class="w-5 h-5"></i>
-                </a>
 
-                <a href="/cart/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    {% if user.is_authenticated and user.cart_items.exists %}
-                        <span class="absolute top-0 right-0 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
-                            {{ user.cart_items.count }}
-                        </span>
-                    {% endif %}
-                </a>
+                {% if user.is_authenticated and not user.is_staff %}
+                    <a href="/wishlist/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </a>
+
+                    <a href="/cart/" class="p-1.5 text-neutral-600 hover:text-red-600 transition-colors relative">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        {% if user.is_authenticated and user.cart_items.exists %}
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                                {{ user.cart_items.count }}
+                            </span>
+                        {% endif %}
+                    </a>
+                {% endif %}
 
                 <div class="h-6 w-[1px] bg-gray-200"></div>
 
