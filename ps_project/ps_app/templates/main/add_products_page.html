@@ -34,10 +34,10 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_brand" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Brand Anchor</label>
-                    <select id="id_brand" name="brand" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer [&>option]:bg-neutral-900 [&>option]:text-white">
-                        <option value="" disabled selected>Select Associated Brand</option>
+                    <select id="id_brand" name="brand" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                        <option value="" disabled selected class="bg-black text-neutral-500">Select Associated Brand</option>
                         {% for brand in brands %}
-                            <option value="{{ brand.id }}" {% if data.brand == brand.id|stringformat:"s" %}selected{% endif %}>{{ brand.name }}</option>
+                            <option value="{{ brand.id }}" {% if data.brand == brand.id|stringformat:"s" %}selected{% endif %} class="bg-black text-white">{{ brand.name }}</option>
                         {% endfor %}
                     </select>
                     {% if errors.brand %}
@@ -55,15 +55,15 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_category" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">System Category</label>
-                    <select id="id_category" name="category" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer [&>option]:bg-neutral-900 [&>option]:text-white">
-                        <option value="" disabled selected>Select Allocation Segment</option>
-                        <option value="cameras" {% if data.category == 'cameras' %}selected{% endif %}>Camera Bodies</option>
-                        <option value="lenses" {% if data.category == 'lenses' %}selected{% endif %}>Lenses & Optics</option>
-                        <option value="stabilizers" {% if data.category == 'stabilizers' %}selected{% endif %}>Gimbals & Tripods</option>
-                        <option value="lighting" {% if data.category == 'lighting' %}selected{% endif %}>Studio & On-Camera Lighting</option>
-                        <option value="audio" {% if data.category == 'audio' %}selected{% endif %}>Microphones & Audio Recorders</option>
-                        <option value="storage" {% if data.category == 'storage' %}selected{% endif %}>Memory Cards & Drives</option>
-                        <option value="accessories" {% if data.category == 'accessories' %}selected{% endif %}>Bags, Power & Rigging</option>
+                    <select id="id_category" name="category" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                        <option value="" disabled selected class="bg-black text-neutral-500">Select Allocation Segment</option>
+                        <option value="cameras" {% if data.category == 'cameras' %}selected{% endif %} class="bg-black text-white">Camera Bodies</option>
+                        <option value="lenses" {% if data.category == 'lenses' %}selected{% endif %} class="bg-black text-white">Lenses & Optics</option>
+                        <option value="stabilizers" {% if data.category == 'stabilizers' %}selected{% endif %} class="bg-black text-white">Gimbals & Tripods</option>
+                        <option value="lighting" {% if data.category == 'lighting' %}selected{% endif %} class="bg-black text-white">Studio & On-Camera Lighting</option>
+                        <option value="audio" {% if data.category == 'audio' %}selected{% endif %} class="bg-black text-white">Microphones & Audio Recorders</option>
+                        <option value="storage" {% if data.category == 'storage' %}selected{% endif %} class="bg-black text-white">Memory Cards & Drives</option>
+                        <option value="accessories" {% if data.category == 'accessories' %}selected{% endif %} class="bg-black text-white">Bags, Power & Rigging</option>
                     </select>
                     {% if errors.category %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.category }}</p>
@@ -72,10 +72,10 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_condition" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Hardware Condition</label>
-                    <select id="id_condition" name="condition" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer [&>option]:bg-neutral-900 [&>option]:text-white">
-                        <option value="new" {% if data.condition == 'new' or not data.condition %}selected{% endif %}>Brand New (Sealed)</option>
-                        <option value="refurbished" {% if data.condition == 'refurbished' %}selected{% endif %}>Factory Refurbished</option>
-                        <option value="open_box" {% if data.condition == 'open_box' %}selected{% endif %}>Open Box / Mint</option>
+                    <select id="id_condition" name="condition" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                        <option value="new" {% if data.condition == 'new' or not data.condition %}selected{% endif %} class="bg-black text-white">Brand New (Sealed)</option>
+                        <option value="refurbished" {% if data.condition == 'refurbished' %}selected{% endif %} class="bg-black text-white">Factory Refurbished</option>
+                        <option value="open_box" {% if data.condition == 'open_box' %}selected{% endif %} class="bg-black text-white">Open Box / Mint</option>
                     </select>
                     {% if errors.condition %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.condition }}</p>
