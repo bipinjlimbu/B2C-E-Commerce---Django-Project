@@ -22,6 +22,7 @@
                         <th class="p-4">Brand Asset</th>
                         <th class="p-4">Valuation (Price)</th>
                         <th class="p-4">Stock Metrics</th>
+                        <th class="p-4">Status</th>
                         <th class="p-4 pr-6 text-right">System Actions</th>
                     </tr>
                 </thead>
@@ -38,32 +39,35 @@
                                 </div>
                                 <div>
                                     <span class="text-white block font-bold">{{ product.name }}</span>
-                                    <span class="text-[11px] font-mono text-red-500 block">{{ product.condition }}</span>
+                                    <span class="text-[11px] font-mono text-red-500 block">{{ product.get_condition_display }}</span>
                                 </div>
                             </td>
-                            <td class="p-4 font-mono text-xs text-neutral-400">{{ product.sku }}</td>
+                            <td class="p-4 font-mono text-xs text-neutral-400">{{ product.sku|default:"--" }}</td>
                             <td class="p-4">
                                 <span class="bg-neutral-900 text-neutral-200 border border-neutral-800 text-[10px] font-black uppercase px-2 py-1 rounded-lg">
-                                    {{ product.brand.name }}
+                                    {{ product.brand.name|default:"Generic" }}
                                 </span>
                             </td>
                             <td class="p-4 font-mono text-sm text-white">Rs.{{ product.price|floatformat:2 }}</td>
                             <td class="p-4">
                                 <div class="space-y-1">
                                     <div class="flex items-center gap-1.5 text-xs font-bold text-neutral-200">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full {% if product.stock > 0 %}bg-green-500{% else %}bg-red-500{% endif %}"></span>
                                         {{ product.stock }} Units Available
-                                    </div>
-                                    <div class="w-24 bg-neutral-900 h-1 rounded-full overflow-hidden border border-neutral-800">
-                                        <div class="bg-green-500 h-full w-3/4"></div>
                                     </div>
                                 </div>
                             </td>
+                            <td class="p-4">
+                                <label class="relative inline-flex items-center cursor-pointer select-none">
+                                    <input type="checkbox" name="is_active" {% if product.is_active %}checked{% endif %} class="sr-only peer" onchange="window.location.href='/products/toggle-status/{{ product.id }}/'">
+                                    <div class="w-9 h-5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-neutral-400 after:border-neutral-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600 peer-checked:after:bg-white peer-checked:after:border-transparent"></div>
+                                </label>
+                            </td>
                             <td class="p-4 pr-6 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button class="p-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white rounded-xl border border-neutral-800 transition-all">
+                                    <a href="/products/edit/{{ product.id }}/" class="p-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white rounded-xl border border-neutral-800 transition-all">
                                         <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                    </button>
+                                    </a>
                                     <button class="p-2 bg-neutral-900 hover:bg-red-600/20 text-neutral-400 hover:text-red-500 rounded-xl border border-neutral-800 hover:border-red-600/30 transition-all">
                                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                                     </button>
