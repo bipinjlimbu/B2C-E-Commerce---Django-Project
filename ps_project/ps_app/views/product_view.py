@@ -82,3 +82,13 @@ def is_active_toggle_view(request, product_id):
     except Product.DoesNotExist:
         messages.error(request, "Product not found.")
     return redirect('/dashboard/admin/?section=product-management')
+
+@login_required
+def delete_product_view(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        product.delete()
+        messages.success(request, f"Product '{product.name}' has been deleted successfully.")
+    except Product.DoesNotExist:
+        messages.error(request, "Product not found.")
+    return redirect('/dashboard/admin/?section=product-management')
