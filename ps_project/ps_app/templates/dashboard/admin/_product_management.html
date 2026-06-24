@@ -26,29 +26,33 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
-                    {% for i in "x"|rjust:"12" %}
+                    {% for product in products %}
                         <tr class="hover:bg-neutral-900/30 transition-colors">
                             <td class="p-4 pl-6 flex items-center gap-3">
                                 <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center text-neutral-500 shrink-0">
-                                    <i data-lucide="camera" class="w-5 h-5 text-neutral-600"></i>
+                                    {% if product.product_image %}
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                                    {% else %}
+                                        <i data-lucide="camera" class="w-5 h-5 text-neutral-600"></i>
+                                    {% endif %}
                                 </div>
                                 <div>
-                                    <span class="text-white block font-bold">Sony Alpha 7 IV</span>
-                                    <span class="text-[11px] font-mono text-red-500 block">Mirrorless Body Only</span>
+                                    <span class="text-white block font-bold">{{ product.name }}</span>
+                                    <span class="text-[11px] font-mono text-red-500 block">{{ product.condition }}</span>
                                 </div>
                             </td>
-                            <td class="p-4 font-mono text-xs text-neutral-400">ILCE-7M4/B</td>
+                            <td class="p-4 font-mono text-xs text-neutral-400">{{ product.sku }}</td>
                             <td class="p-4">
                                 <span class="bg-neutral-900 text-neutral-200 border border-neutral-800 text-[10px] font-black uppercase px-2 py-1 rounded-lg">
-                                    Sony
+                                    {{ product.brand.name }}
                                 </span>
                             </td>
-                            <td class="p-4 font-mono text-sm text-white">$2,499.99</td>
+                            <td class="p-4 font-mono text-sm text-white">Rs.{{ product.price|floatformat:2 }}</td>
                             <td class="p-4">
                                 <div class="space-y-1">
                                     <div class="flex items-center gap-1.5 text-xs font-bold text-neutral-200">
                                         <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                        18 Units Available
+                                        {{ product.stock }} Units Available
                                     </div>
                                     <div class="w-24 bg-neutral-900 h-1 rounded-full overflow-hidden border border-neutral-800">
                                         <div class="bg-green-500 h-full w-3/4"></div>
