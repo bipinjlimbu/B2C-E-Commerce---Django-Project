@@ -16,7 +16,7 @@ def add_product_view(request):
         description = request.POST.get('description')
         price = request.POST.get('price')
         stock = request.POST.get('stock')
-        is_active = request.POST.get('is_active') == 'on'
+        is_active = request.POST.get('is_active') == 'true'
         brand_id = request.POST.get('brand')
         product_image = request.FILES.get('product_image')
 
