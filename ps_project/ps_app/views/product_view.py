@@ -73,7 +73,71 @@ def add_product_view(request):
 
 @login_required
 def edit_product_view(request, product_id):
-    return render(request, 'main/edit_products_page.html')
+    product = Product.objects.get(id=product_id)
+    brands = Brand.objects.all()
+    
+    errors = {}
+    if request.method == "POST":
+        name = request.POST.get('name')
+        sku = request.POST.get('sku')
+        category = request.POST.get('category')
+        condition = request.POST.get('condition')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        stock = request.POST.get('stock')
+        brand_id = request.POST.get('brand')
+        product_image = request.FILES.get('product_image')
+
+        if not name:
+            errors['name'] = "Product name is required."
+            
+        if not sku:
+            errors['sku'] = "SKU is required."
+        elif Product.objects.filter(sku=sku).exclude(id=product_id).exists():
+            errors['sku'] = "SKU must be unique. This SKU already exists."
+            
+        if not category:
+            errors['category'] = "Category is required."
+            
+        if not condition:
+            errors['condition'] = "Condition is required."
+            
+        if not description:
+            errors['description'] = "Description is required."
+            
+        if not price:
+            errors['price'] = "Price is required."
+            
+        if not stock:
+            errors['stock'] = "Stock quantity is required."
+            
+        if not brand_id:
+            errors['brand'] = "Brand selection is required."
+
+        if errors:
+            return render(request, 'main/edit_products_page.html', {'product': product, 'brands': brands, 'data': request.POST, 'errors': errors})
+        
+        brand = Brand.objects.get(id=brand_id)
+        
+        product.name = name
+        product.sku = sku
+        product.category = category
+        product.condition = condition
+        product.description = description
+        product.price = price
+        product.stock = stock
+        product.brand = brand
+        
+        if product_image:
+            product.product_image.delete(save=False)
+            product.product_image = product_image
+        
+        product.save()
+        
+        messages.success(request, f"Product '{name}' has been updated successfully.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
+    return render(request, 'main/edit_products_page.html', {'product': product, 'brands': brands})
 
 @login_required
 def is_active_toggle_view(request, product_id):

@@ -25,7 +25,7 @@
                 <div class="space-y-6 md:col-span-2">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                         <label for="id_name" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Product Title</label>
-                        <input type="text" id="id_name" name="name" {% if data %} value="{{ data.name }}" {% else %} value="{{ product.name }}" {% endif %} required maxlength="255" placeholder="e.g. Sony Alpha 7 IV" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700">
+                        <input type="text" id="id_name" name="name" {% if data %} value="{{ data.name }}" {% else %} value="{{ product.name }}" {% endif %} maxlength="255" placeholder="e.g. Sony Alpha 7 IV" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700">
                         {% if errors.name %}
                             <p class="text-red-500 text-xs mt-1">{{ errors.name }}</p>
                         {% endif %}
@@ -34,10 +34,10 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_brand" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Brand Anchor</label>
-                    <select id="id_brand" name="brand" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_brand" name="brand" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="" disabled class="bg-black text-neutral-500">Select Associated Brand</option>
                         {% for brand in brands %}
-                            <option value="{{ brand.id }}" {% if data %} {% if data.brand == brand.id %}selected{% endif %} {% else %} {% if product.brand.id == brand.id %}selected{% endif %} {% endif %} class="bg-black text-white">{{ brand.name }}</option>
+                            <option value="{{ brand.id }}" {% if data %} {% if data.brand == brand.id|stringformat:"s" %} selected {% endif %} {% else %} {% if product.brand.id == brand.id %}selected{% endif %} {% endif %} class="bg-black text-white">{{ brand.name }}</option>
                         {% endfor %}
                     </select>
                     {% if errors.brand %}
@@ -55,7 +55,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_category" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">System Category</label>
-                    <select id="id_category" name="category" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_category" name="category" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="" disabled class="bg-black text-neutral-500">Select Allocation Segment</option>
                         <option value="cameras" {% if data %} {% if data.category == 'cameras' %}selected{% endif %} {% else %} {% if product.category == 'cameras' %}selected{% endif %} {% endif %} class="bg-black text-white">Camera Bodies</option>
                         <option value="lenses" {% if data %} {% if data.category == 'lenses' %}selected{% endif %} {% else %} {% if product.category == 'lenses' %}selected{% endif %} {% endif %} class="bg-black text-white">Lenses & Optics</option>
@@ -72,7 +72,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_condition" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Hardware Condition</label>
-                    <select id="id_condition" name="condition" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_condition" name="condition" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="new" {% if data %} {% if data.condition == 'new' %}selected{% endif %} {% else %} {% if product.condition == 'new' %}selected{% endif %} {% endif %} class="bg-black text-white">Brand New (Sealed)</option>
                         <option value="refurbished" {% if data %} {% if data.condition == 'refurbished' %}selected{% endif %} {% else %} {% if product.condition == 'refurbished' %}selected{% endif %} {% endif %} class="bg-black text-white">Factory Refurbished</option>
                         <option value="open_box" {% if data %} {% if data.condition == 'open_box' %}selected{% endif %} {% else %} {% if product.condition == 'open_box' %}selected{% endif %} {% endif %} class="bg-black text-white">Open Box / Mint</option>
@@ -84,7 +84,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_price" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Valuation Price ($)</label>
-                    <input type="number" id="id_price" name="price" step="0.01" min="0" {% if data %} value="{{ data.price }}" {% else %} value="{{ product.price|stringformat:".2f" }}" {% endif %} required placeholder="0.00" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
+                    <input type="number" id="id_price" name="price" step="0.01" min="0" {% if data %} value="{{ data.price }}" {% else %} value="{{ product.price|stringformat:".2f" }}" {% endif %} placeholder="0.00" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
                     {% if errors.price %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.price }}</p>
                     {% endif %}
@@ -92,7 +92,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_stock" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Stock Metric Quantity</label>
-                    <input type="number" id="id_stock" name="stock" min="0" {% if data %} value="{{ data.stock }}" {% else %} value="{{ product.stock }}" {% endif %} required placeholder="0" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
+                    <input type="number" id="id_stock" name="stock" min="0" {% if data %} value="{{ data.stock }}" {% else %} value="{{ product.stock }}" {% endif %} placeholder="0" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
                     {% if errors.stock %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.stock }}</p>
                     {% endif %}
