@@ -25,7 +25,7 @@
                 <div class="space-y-6 md:col-span-2">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                         <label for="id_name" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Product Title</label>
-                        <input type="text" id="id_name" name="name" value="{{ data.name|default:'' }}" required maxlength="255" placeholder="e.g. Sony Alpha 7 IV" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700">
+                        <input type="text" id="id_name" name="name" value="{{ data.name|default:'' }}" maxlength="255" placeholder="e.g. Sony Alpha 7 IV" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700">
                         {% if errors.name %}
                             <p class="text-red-500 text-xs mt-1">{{ errors.name }}</p>
                         {% endif %}
@@ -34,7 +34,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_brand" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Brand Anchor</label>
-                    <select id="id_brand" name="brand" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_brand" name="brand" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="" disabled selected class="bg-black text-neutral-500">Select Associated Brand</option>
                         {% for brand in brands %}
                             <option value="{{ brand.id }}" {% if data.brand == brand.id|stringformat:"s" %}selected{% endif %} class="bg-black text-white">{{ brand.name }}</option>
@@ -55,7 +55,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_category" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">System Category</label>
-                    <select id="id_category" name="category" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_category" name="category" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="" disabled selected class="bg-black text-neutral-500">Select Allocation Segment</option>
                         <option value="cameras" {% if data.category == 'cameras' %}selected{% endif %} class="bg-black text-white">Camera Bodies</option>
                         <option value="lenses" {% if data.category == 'lenses' %}selected{% endif %} class="bg-black text-white">Lenses & Optics</option>
@@ -72,7 +72,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_condition" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Hardware Condition</label>
-                    <select id="id_condition" name="condition" required class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
+                    <select id="id_condition" name="condition" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none cursor-pointer">
                         <option value="new" {% if data.condition == 'new' or not data.condition %}selected{% endif %} class="bg-black text-white">Brand New (Sealed)</option>
                         <option value="refurbished" {% if data.condition == 'refurbished' %}selected{% endif %} class="bg-black text-white">Factory Refurbished</option>
                         <option value="open_box" {% if data.condition == 'open_box' %}selected{% endif %} class="bg-black text-white">Open Box / Mint</option>
@@ -84,7 +84,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_price" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Valuation Price ($)</label>
-                    <input type="number" id="id_price" name="price" step="0.01" min="0" value="{{ data.price|default:'' }}" required placeholder="0.00" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
+                    <input type="number" id="id_price" name="price" step="0.01" min="0" value="{{ data.price|default:'' }}" placeholder="0.00" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
                     {% if errors.price %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.price }}</p>
                     {% endif %}
@@ -92,7 +92,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label for="id_stock" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Stock Metric Quantity</label>
-                    <input type="number" id="id_stock" name="stock" min="0" value="{{ data.stock|default:'0' }}" required placeholder="0" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
+                    <input type="number" id="id_stock" name="stock" min="0" value="{{ data.stock|default:'0' }}" placeholder="0" class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 font-mono">
                     {% if errors.stock %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.stock }}</p>
                     {% endif %}
@@ -101,7 +101,7 @@
                 <div class="space-y-6 md:col-span-2">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                         <label for="id_description" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Technical Specs & Description</label>
-                        <textarea id="id_description" name="description" rows="5" required placeholder="Enter full specifications structural logs..." class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 resize-none">{{ data.description|default:'' }}</textarea>
+                        <textarea id="id_description" name="description" rows="5" placeholder="Enter full specifications structural logs..." class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 resize-none">{{ data.description|default:'' }}</textarea>
                         {% if errors.description %}
                             <p class="text-red-500 text-xs mt-1">{{ errors.description }}</p>
                         {% endif %}
@@ -117,7 +117,7 @@
                             <div class="flex text-xs text-neutral-400 justify-center">
                                 <label for="id_product_image" class="relative cursor-pointer rounded-md font-bold text-red-500 hover:text-red-400 focus-within:outline-none">
                                     <span>Upload asset imagery</span>
-                                    <input id="id_product_image" name="product_image" type="file" accept="image/*" required class="sr-only">
+                                    <input id="id_product_image" name="product_image" type="file" accept="image/*" class="sr-only">
                                 </label>
                             </div>
                             <p class="text-[10px] text-neutral-600 uppercase tracking-wider">Image files up to 10MB</p>
