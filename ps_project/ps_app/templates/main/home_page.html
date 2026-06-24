@@ -151,87 +151,45 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group">
-                    <div class="aspect-square bg-neutral-100 flex items-center justify-center p-6 relative">
-                        <span class="absolute top-3 left-3 bg-neutral-900 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Hot</span>
-                        <i data-lucide="camera" class="w-16 h-16 text-neutral-400 group-hover:scale-105 transition-transform"></i>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Cameras</span>
-                            <h3 class="font-bold text-neutral-900 text-sm group-hover:text-red-600 transition-colors line-clamp-1">Lumix S5II Mirrorless System</h3>
-                            <p class="text-xs text-neutral-500 mt-1 line-clamp-2">Phase Hybrid AF infrastructure with continuous tracking metrics.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                            <span class="text-base font-black text-neutral-950">$1,999.00</span>
-                            <button class="bg-neutral-50 hover:bg-red-600 hover:text-white text-neutral-700 p-2 rounded-xl transition-all border border-gray-200 hover:border-red-600">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group">
-                    <div class="aspect-square bg-neutral-100 flex items-center justify-center p-6 relative">
-                        <i data-lucide="aperture" class="w-16 h-16 text-neutral-400 group-hover:scale-105 transition-transform"></i>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Lenses</span>
-                            <h3 class="font-bold text-neutral-900 text-sm group-hover:text-red-600 transition-colors line-clamp-1">50mm f/1.2 Cine Prime Glass</h3>
-                            <p class="text-xs text-neutral-500 mt-1 line-clamp-2">Ultra-fast aperture configuration optimized for low-illumination clarity.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                            <span class="text-base font-black text-neutral-950">$1,249.00</span>
-                            <button class="bg-neutral-50 hover:bg-red-600 hover:text-white text-neutral-700 p-2 rounded-xl transition-all border border-gray-200 hover:border-red-600">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group">
-                    <div class="aspect-square bg-neutral-100 flex items-center justify-center p-6 relative">
-                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Sale</span>
-                        <i data-lucide="sliders" class="w-16 h-16 text-neutral-400 group-hover:scale-105 transition-transform"></i>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Accessories</span>
-                            <h3 class="font-bold text-neutral-900 text-sm group-hover:text-red-600 transition-colors line-clamp-1">ProStream 3-Axis Pro Gimbal</h3>
-                            <p class="text-xs text-neutral-500 mt-1 line-clamp-2">Carbon-isolated construction with real-time payload stabilization logic.</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                            <div class="flex flex-col">
-                                <span class="text-xs text-neutral-400 line-through">$599.00</span>
-                                <span class="text-base font-black text-red-600">$479.00</span>
+                {% for product in products %}
+                <a href="/products/{{ product.id }}/" class="bg-black border border-neutral-800 rounded-2xl overflow-hidden shadow-xl hover:border-red-600/50 transition-all flex flex-col group relative">
+                    <div class="aspect-square bg-neutral-950 flex items-center justify-center p-4 relative overflow-hidden border-b border-neutral-900">
+                        {% if product.product_image %}
+                            <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% else %}
+                            <div class="w-full h-full flex flex-col items-center justify-center bg-neutral-900/50 rounded-xl">
+                                <i data-lucide="camera" class="w-10 h-10 text-neutral-700 group-hover:scale-110 group-hover:text-red-500 transition-all duration-300"></i>
+                                <span class="text-[9px] uppercase tracking-widest text-neutral-600 font-bold mt-2">No Imagery</span>
                             </div>
-                            <button class="bg-neutral-50 hover:bg-red-600 hover:text-white text-neutral-700 p-2 rounded-xl transition-all border border-gray-200 hover:border-red-600">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                            </button>
-                        </div>
+                        {% endif %}
+                        <span class="absolute top-3 left-3 bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-[9px] font-black uppercase tracking-widest text-neutral-400 px-2.5 py-1 rounded-md">
+                            {{ product.get_category_display }}
+                        </span>
                     </div>
-                </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group">
-                    <div class="aspect-square bg-neutral-100 flex items-center justify-center p-6 relative">
-                        <i data-lucide="layers" class="w-16 h-16 text-neutral-400 group-hover:scale-105 transition-transform"></i>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Accessories</span>
-                            <h3 class="font-bold text-neutral-900 text-sm group-hover:text-red-600 transition-colors line-clamp-1">Variable ND Filter Matrix (82mm)</h3>
-                            <p class="text-xs text-neutral-500 mt-1 line-clamp-2">Pure optical-grade protective tint matrices with minimal polarization bias.</p>
+                    <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                        <div class="space-y-1.5">
+                            <h3 class="font-bold text-neutral-200 text-sm tracking-tight group-hover:text-red-500 transition-colors line-clamp-1">
+                                {{ product.name }}
+                            </h3>
+                            <p class="text-[11px] text-neutral-500 font-medium leading-relaxed">
+                                {{ product.description|default:"No technical specifications logs available."|truncatewords:10 }}
+                            </p>
                         </div>
-                        <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                            <span class="text-base font-black text-neutral-950">$189.00</span>
-                            <button class="bg-neutral-50 hover:bg-red-600 hover:text-white text-neutral-700 p-2 rounded-xl transition-all border border-gray-200 hover:border-red-600">
+
+                        <div class="flex items-center justify-between pt-3 border-t border-neutral-900" onclick="event.preventDefault();">
+                            <div class="flex flex-col">
+                                <span class="text-[9px] uppercase font-bold tracking-wider text-neutral-600">Valuation</span>
+                                <span class="text-base font-mono font-black text-white">Rs. {{ product.price|floatformat:2 }}</span>
+                            </div>
+                            <button class="bg-neutral-900 hover:bg-red-600 text-neutral-400 hover:text-white w-9 h-9 rounded-xl transition-all border border-neutral-800 hover:border-red-600 flex items-center justify-center shadow-lg hover:shadow-red-600/20 relative z-10">
                                 <i data-lucide="shopping-bag" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
-                </div>
+                </a>
+                {% endfor %}
 
             </div>
         </section>
