@@ -70,3 +70,15 @@ def add_product_view(request):
         return redirect('/dashboard/admin/?section=product-management')
         
     return render(request, 'main/add_products_page.html',{'brands':brands})
+
+@login_required
+def is_active_toggle_view(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        product.is_active = not product.is_active
+        product.save()
+        status = "activated" if product.is_active else "deactivated"
+        messages.success(request, f"Product '{product.name}' has been {status}.")
+    except Product.DoesNotExist:
+        messages.error(request, "Product not found.")
+    return redirect('/dashboard/admin/?section=product-management')
