@@ -72,6 +72,10 @@ def add_product_view(request):
     return render(request, 'main/add_products_page.html',{'brands':brands})
 
 @login_required
+def edit_product_view(request, product_id):
+    return render(request, 'main/edit_products_page.html')
+
+@login_required
 def is_active_toggle_view(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
