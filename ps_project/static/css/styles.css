@@ -431,12 +431,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scroll-snap-strictness: proximity;
 }
 
-.divide-y > *, .border, .border-t, .border-b, .border-r, .file\:border-0::file-selector-button, .after\:border::after, .lg\:border-b-0, .lg\:border-r {
+.divide-y > *, .border, .border-t, .border-b, .border-r, .file\:border-0::file-selector-button, .after\:border::after, .sm\:border-t-0, .lg\:border-b-0, .lg\:border-r {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.shadow-sm, .shadow-2xl, .shadow-lg, .shadow-xl {
+.shadow-sm, .shadow-2xl, .shadow-lg, .shadow-xl, .shadow-md {
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -731,6 +731,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.5rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -813,6 +817,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-2 {
   width: 0.5rem;
+}
+
+.w-7 {
+  width: 1.75rem;
 }
 
 .min-w-\[280px\] {
@@ -1000,6 +1008,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-0 {
   gap: 0px;
+}
+
+.gap-5 {
+  gap: 1.25rem;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -1198,6 +1210,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-red-600\/30 {
   border-color: rgb(220 38 38 / 0.3);
+}
+
+.border-red-600\/20 {
+  border-color: rgb(220 38 38 / 0.2);
 }
 
 .bg-gray-50 {
@@ -1456,6 +1472,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 1.25rem;
 }
 
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.py-3\.5 {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
@@ -1510,6 +1536,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
 }
 
 .text-left {
@@ -1718,6 +1748,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(38 38 38 / var(--tw-text-opacity));
 }
 
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -1777,6 +1812,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -2232,6 +2273,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     align-items: center;
   }
 
+  .sm\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .sm\:border-t-0 {
+    border-top-width: 0px;
+  }
+
   .sm\:p-8 {
     padding: 2rem;
   }
@@ -2240,9 +2289,21 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding: 1.5rem;
   }
 
+  .sm\:p-5 {
+    padding: 1.25rem;
+  }
+
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .sm\:pt-0 {
+    padding-top: 0px;
+  }
+
+  .sm\:text-left {
+    text-align: left;
   }
 
   .sm\:text-5xl {
@@ -2282,12 +2343,24 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 1024px) {
+  .lg\:sticky {
+    position: sticky;
+  }
+
+  .lg\:top-24 {
+    top: 6rem;
+  }
+
   .lg\:col-span-5 {
     grid-column: span 5 / span 5;
   }
 
   .lg\:col-span-7 {
     grid-column: span 7 / span 7;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
   }
 
   .lg\:block {
@@ -2304,6 +2377,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:gap-16 {
@@ -2354,5 +2431,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   .lg\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
