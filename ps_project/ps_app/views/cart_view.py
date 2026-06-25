@@ -41,3 +41,11 @@ def decrease_cart_item_quantity(request, product_id):
     else:
         messages.warning(request, "Quantity cannot be less than 1. To remove the item, please delete it from the cart.")
     return redirect('/cart/')
+
+@login_required
+def remove_cart_item(request, product_id):
+    cart = Cart.objects.get(customer=request.user)
+    cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
+    cart_item.delete()
+    messages.success(request, "Item removed from cart.")
+    return redirect('/cart/')
