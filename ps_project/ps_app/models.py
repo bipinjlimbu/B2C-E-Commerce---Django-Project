@@ -64,7 +64,7 @@ class Wishlist(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
 class Cart(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_items')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart')
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
