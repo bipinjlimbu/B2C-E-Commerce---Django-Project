@@ -4,6 +4,11 @@ from django.contrib import messages
 from ..models import Brand, Product
 
 @login_required
+def products_view(request):
+    products = Product.objects.filter(is_active=True).order_by('-created_at')
+    return render(request, 'main/products_page.html', {'products': products})
+
+@login_required
 def add_product_view(request):
     brands = Brand.objects.all()
     
