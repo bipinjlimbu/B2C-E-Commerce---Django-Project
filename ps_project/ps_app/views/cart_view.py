@@ -22,6 +22,11 @@ def cart_view(request):
 def increase_cart_item_quantity(request, product_id):
     cart = Cart.objects.get(customer=request.user)
     cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
+    
+    if cart_item.product.stock <= cart_item.quantity:
+        messages.warning(request, "Cannot increase quantity. Stock limit reached.")
+        return redirect('/cart/')
+    
     cart_item.quantity += 1
     cart_item.save()
     return redirect('/cart/')
