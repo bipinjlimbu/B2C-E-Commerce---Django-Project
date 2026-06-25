@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from ..models import Brand, Product
+from ..models import Brand, Product, Wishlist
 
 @login_required
 def products_view(request):
@@ -172,3 +172,16 @@ def single_product_view(request, product_id):
         messages.error(request, "This product is currently inactive.")
         return redirect('home')
     return render(request, 'main/single_product_page.html', {'product': product})
+
+@login_required
+def wishlist_toggle_view(request, product_id):
+    product = Product.objects.get(id=product_id)
+    if Wishlist.objects.filter(customer=request.user, product=product).exists():
+        wishlist = Wishlist.objects.get(customer=request.user, product=product)
+        wishlist.delete()
+        messages.success(request, f"Product '{product.name}' has been removed from your wishlist.")
+    else:
+        Wishlist.objects.create(customer=request.user, product=product)
+        messages.success(request, f"Product '{product.name}' has been added to your wishlist.")
+        
+    return redirect(f'/products/{product_id}/')
