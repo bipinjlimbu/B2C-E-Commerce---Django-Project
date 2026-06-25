@@ -34,3 +34,28 @@ def admin_dashboard_view(request):
         context['revenue_logs'] = None
         
     return render(request, 'dashboard/admin_dashboard.html', context)
+
+def customer_dashboard_view(request):
+    if not request.user.is_authenticated or request.user.is_staff:
+        messages.error(request, "You are not authorized to access the customer dashboard.")
+        return redirect('/')
+    
+    section = request.GET.get('section', 'pending-orders')
+    
+    context = {
+        'section' : section,
+    }
+        
+    if section == 'pending-orders':
+        context['pending_orders'] = None
+        
+    elif section == 'my-orders':
+        context['orders'] = None
+        
+    elif section == 'total-spent':
+        context['total_spent'] = None
+        
+    elif section == 'my-reviews':
+        context['product_reviews'] = None
+        
+    return render(request, 'dashboard/customer_dashboard.html', context)

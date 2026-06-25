@@ -6,7 +6,7 @@ from .views.brand_view import add_brand_view, edit_brand_view, delete_brand_view
 from .views.product_view import products_view, add_product_view, edit_product_view, is_active_toggle_view, delete_product_view, single_product_view
 from .views.cart_view import add_to_cart_view, cart_view, increase_cart_item_quantity, decrease_cart_item_quantity, remove_cart_item
 from .views.wishlist_view import wishlist_view, wishlist_toggle_view, wishlist_remove_view
-from .views.dashboard import admin_dashboard_view
+from .views.dashboard import admin_dashboard_view, customer_dashboard_view
 
 urlpatterns = [
     path('', home_view, name='home'),
@@ -34,4 +34,5 @@ urlpatterns = [
     path('products/wishlist-toggle/<int:product_id>/', wishlist_toggle_view, name='wishlist_toggle'), 
     path('products/wishlist/remove/<int:product_id>/', wishlist_remove_view, name='wishlist_remove'),  
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
+    path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
