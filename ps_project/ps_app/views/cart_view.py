@@ -25,3 +25,14 @@ def increase_cart_item_quantity(request, product_id):
     cart_item.quantity += 1
     cart_item.save()
     return redirect('/cart/')
+
+@login_required
+def decrease_cart_item_quantity(request, product_id):
+    cart = Cart.objects.get(customer=request.user)
+    cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        messages.warning(request, "Quantity cannot be less than 1. To remove the item, please delete it from the cart.")
+    return redirect('/cart/')
