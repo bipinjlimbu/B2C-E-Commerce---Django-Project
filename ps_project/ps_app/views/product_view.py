@@ -178,16 +178,3 @@ def single_product_view(request, product_id):
         product.in_wishlist = False
         
     return render(request, 'main/single_product_page.html', {'product': product})
-
-@login_required
-def wishlist_toggle_view(request, product_id):
-    product = Product.objects.get(id=product_id)
-    if Wishlist.objects.filter(customer=request.user, product=product).exists():
-        wishlist = Wishlist.objects.get(customer=request.user, product=product)
-        wishlist.delete()
-        messages.success(request, f"Product '{product.name}' has been removed from your wishlist.")
-    else:
-        Wishlist.objects.create(customer=request.user, product=product)
-        messages.success(request, f"Product '{product.name}' has been added to your wishlist.")
-        
-    return redirect(f'/products/{product_id}/')

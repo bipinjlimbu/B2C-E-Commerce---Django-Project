@@ -888,6 +888,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex: 1 1 0%;
 }
 
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
 .shrink-0 {
   flex-shrink: 0;
 }
@@ -961,6 +965,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -1124,6 +1132,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .divide-neutral-900 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(23 23 23 / var(--tw-divide-opacity));
+}
+
+.self-center {
+  align-self: center;
 }
 
 .overflow-hidden {
@@ -2349,6 +2361,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     flex-wrap: nowrap;
   }
 
+  .sm\:items-start {
+    align-items: flex-start;
+  }
+
   .sm\:items-end {
     align-items: flex-end;
   }
@@ -2359,6 +2375,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:justify-end {
     justify-content: flex-end;
+  }
+
+  .sm\:self-start {
+    align-self: flex-start;
   }
 
   .sm\:border-t-0 {
@@ -2388,6 +2408,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:text-left {
     text-align: left;
+  }
+
+  .sm\:text-right {
+    text-align: right;
   }
 
   .sm\:text-5xl {
