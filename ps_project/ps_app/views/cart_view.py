@@ -6,7 +6,6 @@ from ..models import Cart, Product
 @login_required
 def add_to_cart_view(request, product_id):
     product = Product.objects.get(id=product_id)
-    customer = request.user
-    cart, created = Cart.objects.get_or_create(user=request.user, product = product, customer = customer )
+    cart, created = Cart.objects.get_or_create(customer=request.user, product = product )
     messages.success(request, "Product added to cart.")
     return redirect('/products')
