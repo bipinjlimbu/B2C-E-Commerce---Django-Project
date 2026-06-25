@@ -5,8 +5,10 @@ from ..models import Brand, Product, Wishlist
 
 @login_required
 def products_view(request):
-    products = Product.objects.filter(is_active=True).order_by('-created_at')
-    return render(request, 'main/products_page.html', {'products': products})
+    context = {}
+    context['products'] = Product.objects.filter(is_active=True).order_by('-created_at')
+    context['brands'] = Brand.objects.all()
+    return render(request, 'main/products_page.html', context)
 
 @login_required
 def add_product_view(request):
