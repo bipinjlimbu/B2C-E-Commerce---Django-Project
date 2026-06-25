@@ -17,3 +17,11 @@ def cart_view(request):
     cart_items = cart.items.all()
     total_price = sum(item.total_price for item in cart_items)
     return render(request, 'main/cart_page.html', {'cart_items': cart_items, 'total_price': total_price})
+
+@login_required
+def increase_cart_item_quantity(request, product_id):
+    cart = Cart.objects.get(customer=request.user)
+    cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect('/cart/')
