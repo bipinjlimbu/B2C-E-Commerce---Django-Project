@@ -36,7 +36,7 @@
                 <div class="space-y-1.5">
                     <label class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">Manufacturer / Brand</label>
                     <select name="brand" onchange="this.form.submit()" class="w-full bg-black border border-neutral-800 rounded-xl p-3 text-xs font-mono text-neutral-300 focus:outline-none focus:border-red-600">
-                        <option value="">All Brands</option>
+                        <option value="all">All Brands</option>
                         {% for brand in brands %}
                             <option value="{{ brand.id }}" {% if request.GET.brand == brand.id|stringformat:"i" %}selected{% endif %}>{{ brand.name }}</option>
                         {% endfor %}
@@ -46,7 +46,7 @@
                 <div class="space-y-1.5">
                     <label class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">Condition Spec</label>
                     <select name="condition" onchange="this.form.submit()" class="w-full bg-black border border-neutral-800 rounded-xl p-3 text-xs font-mono text-neutral-300 focus:outline-none focus:border-red-600">
-                        <option value="">Any Condition</option>
+                        <option value="all">Any Condition</option>
                         <option value="new" {% if request.GET.condition == 'new' %}selected{% endif %}>Brand New (Sealed)</option>
                         <option value="refurbished" {% if request.GET.condition == 'refurbished' %}selected{% endif %}>Factory Refurbished</option>
                         <option value="open_box" {% if request.GET.condition == 'open_box' %}selected{% endif %}>Open Box / Mint</option>
