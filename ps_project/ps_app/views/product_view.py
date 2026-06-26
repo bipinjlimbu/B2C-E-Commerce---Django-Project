@@ -10,6 +10,7 @@ def products_view(request):
     category = request.GET.get('category', 'all')
     brand_id = request.GET.get('brand', 'all')
     condition = request.GET.get('condition', 'all')
+    price_range = request.GET.get('price_range', 'all')
     sort_by = request.GET.get('sort', 'latest')
     
     products = Product.objects.all().order_by('-created_at')
@@ -23,6 +24,18 @@ def products_view(request):
         
     if condition and condition != 'all':
         products = products.filter(condition=condition, is_active=True).order_by('-created_at')
+        
+    if price_range and price_range != 'all':
+        if price_range == '0-999':
+            products = products.filter(price__gte=0, price__lte=999, is_active=True).order_by('-created_at')
+        elif price_range == '1000-4999':
+            products = products.filter(price__gte=1000, price__lte=4999, is_active=True).order_by('-created_at')
+        elif price_range == '5000-9999':
+            products = products.filter(price__gte=5000, price__lte=9999, is_active=True).order_by('-created_at')
+        elif price_range == '10000-49999':
+            products = products.filter(price__gte=10000, price__lte=49999, is_active=True).order_by('-created_at')
+        elif price_range == '50000+':
+            products = products.filter(price__gte=50000, is_active=True).order_by('-created_at')
         
     if sort_by == 'price_asc':
         products = products.filter(is_active=True).order_by('price')
