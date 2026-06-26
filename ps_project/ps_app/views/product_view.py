@@ -6,7 +6,30 @@ from ..models import Brand, Product, Wishlist
 @login_required
 def products_view(request):
     context = {}
-    context['products'] = Product.objects.filter(is_active=True).order_by('-created_at')
+    
+    category = request.GET.get('category', 'all')
+    brand_id = request.GET.get('brand', 'all')
+    condition = request.GET.get('condition', 'all')
+    sort_by = request.GET.get('sort', 'latest')
+    
+    products = Product.objects.all().order_by('-created_at')
+    
+    if category and category != 'all':
+        products = products.filter(category=category, is_active=True).order_by('-created_at')
+        
+    if brand_id and brand_id != 'all':
+        brand_instance = Brand.objects.get(id=brand_id)
+        products = products.filter(brand=brand_instance, is_active=True).order_by('-created_at')
+        
+    if condition and condition != 'all':
+        products = products.filter(condition=condition, is_active=True).order_by('-created_at')
+        
+    if sort_by == 'price_asc':
+        products = products.filter(is_active=True).order_by('price')
+    elif sort_by == 'price_desc':
+        products = products.filter(is_active=True).order_by('-price')
+        
+    context['products'] = products
     context['brands'] = Brand.objects.all()
     return render(request, 'main/products_page.html', context)
 
