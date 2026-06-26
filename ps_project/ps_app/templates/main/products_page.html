@@ -71,6 +71,8 @@
                         <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest System Logs</option>
                         <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
                         <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                        <option value="stock_asc" {% if request.GET.sort == 'stock_asc' %}selected{% endif %}>Stock: Low to High</option>
+                        <option value="stock_desc" {% if request.GET.sort == 'stock_desc' %}selected{% endif %}>Stock: High to Low</option>
                     </select>
                 </div>
 
