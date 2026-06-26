@@ -41,6 +41,10 @@ def products_view(request):
         products = products.filter(is_active=True).order_by('price')
     elif sort_by == 'price_desc':
         products = products.filter(is_active=True).order_by('-price')
+    elif sort_by == 'stock_asc':
+        products = products.filter(is_active=True).order_by('stock')
+    elif sort_by == 'stock_desc':
+        products = products.filter(is_active=True).order_by('-stock')
         
     context['products'] = products
     context['brands'] = Brand.objects.all()
