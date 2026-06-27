@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Confirmed | PixelShot</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-zinc-50 flex flex-col min-h-screen">
+    {% include 'components/_navbar.html' %}
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="success-wrapper bg-white rounded-[2rem] shadow-xl max-w-md w-full p-10 text-center border border-zinc-100 border-b-[10px] border-b-emerald-500">
+            
+            <div class="status-img flex justify-center mb-6">
+                <div class="bg-emerald-50 p-5 rounded-full shadow-inner relative group">
+                    <i data-lucide="aperture" class="w-16 h-16 text-emerald-600 stroke-[2.5px] animate-spin-slow"></i>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i data-lucide="check" class="w-6 h-6 text-emerald-700 stroke-[3px]"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-black text-zinc-900 tracking-tight uppercase mb-1">
+                Order <span class="text-emerald-600">Captured</span>
+            </h2>
+            <p class="text-zinc-500 mb-8 text-sm font-medium">Your assets have been processed successfully.</p>
+
+            <div class="order-info bg-zinc-50 rounded-2xl p-6 mb-8 text-left border border-zinc-200 divide-y divide-zinc-200/60">
+                <p class="flex justify-between py-3">
+                    <strong class="text-zinc-400 uppercase text-[10px] tracking-[0.15em] font-bold">Order ID</strong> 
+                    <span class="text-zinc-900 font-extrabold font-mono">#{{ order.id }}</span>
+                </p>
+                <p class="flex justify-between py-3">
+                    <strong class="text-zinc-400 uppercase text-[10px] tracking-[0.15em] font-bold">Transaction Ref</strong> 
+                    <span class="text-zinc-800 font-mono text-xs font-medium truncate ml-4">{{ order.transaction_id }}</span>
+                </p>
+                <p class="flex justify-between py-3 pt-4">
+                    <strong class="text-zinc-400 uppercase text-[10px] tracking-[0.15em] font-bold">Total Settled</strong> 
+                    <span class="text-emerald-600 font-black text-xl font-mono">Rs. {{ order.total_amount }}</span>
+                </p>
+            </div>
+
+            <a href="/" class="btn-main group flex items-center justify-center w-full bg-zinc-900 text-white py-4 rounded-2xl font-bold uppercase tracking-wider hover:bg-black transition-all active:scale-95 shadow-lg shadow-zinc-200">
+                Return to Gallery
+                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
