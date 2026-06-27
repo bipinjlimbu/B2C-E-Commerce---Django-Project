@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from ..models import Cart, Order, OrderItem
+from ..models import CartItem, Order, OrderItem
 import requests
 import json
 import hmac
@@ -90,7 +90,7 @@ def payment_success_view(request):
     if verification_status.get('status') == "COMPLETE":
         # --- DB SAVING LOGIC (AS PER YOUR ORIGINAL) ---
         customer = request.user
-        cart_items = Cart.objects.filter(customer=customer)
+        cart_items = CartItem.objects.filter(cart__customer=customer)
         
         # 1. Create Main Order
         order = Order.objects.create(
