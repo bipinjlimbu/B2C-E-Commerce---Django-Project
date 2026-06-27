@@ -122,3 +122,7 @@ def payment_success_view(request):
     else:
         messages.error(request, "Verification Failed. Protocol Aborted.")
         return redirect('payment_failed')
+    
+def payment_failed(request):
+    messages.error(request, "Payment Failed or Cancelled. Please try again.")
+    return render(request, 'main/payment_failed_page.html')
