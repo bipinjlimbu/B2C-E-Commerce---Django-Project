@@ -1488,6 +1488,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
 }
 
+.bg-rose-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 241 242 / var(--tw-bg-opacity));
+}
+
 .bg-\[radial-gradient\(\#e5e7eb_1px\2c transparent_1px\)\] {
   background-image: radial-gradient(#e5e7eb 1px,transparent 1px);
 }
@@ -1510,6 +1515,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .stroke-\[3px\] {
   stroke-width: 3px;
+}
+
+.stroke-\[2px\] {
+  stroke-width: 2px;
 }
 
 .object-contain {
@@ -2016,6 +2025,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
+.text-rose-600 {
+  --tw-text-opacity: 1;
+  color: rgb(225 29 72 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -2430,6 +2444,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-amber-500:hover {
   --tw-text-opacity: 1;
   color: rgb(245 158 11 / var(--tw-text-opacity));
+}
+
+.hover\:text-zinc-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(82 82 91 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-red-600\/20:hover {

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Failed | PixelShot</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-zinc-50 flex flex-col min-h-screen">
+    {% include 'components/_navbar.html' %}
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="max-w-md w-full bg-white p-10 rounded-3xl shadow-xl border border-zinc-100 text-center">
+            
+            <div class="flex justify-center mb-6">
+                <div class="bg-rose-50 p-5 rounded-full animate-pulse">
+                    <i data-lucide="alert-triangle" class="w-16 h-16 text-rose-600 stroke-[2px]"></i>
+                </div>
+            </div>
+            
+            <h2 class="text-3xl font-black text-zinc-900 tracking-tight uppercase mb-2">
+                Capture <span class="text-rose-600">Failed</span>
+            </h2>
+            
+            <p class="text-zinc-500 mb-8 font-medium leading-relaxed text-sm">
+                {% if messages %}
+                    {% for message in messages %}{{ message }}{% endfor %}
+                {% else %}
+                    The checkout window timed out or your payment authorization was declined.
+                {% endif %}
+            </p>
+
+            <div class="space-y-4">
+                <a href="/cart/" class="w-full bg-zinc-900 text-white font-bold py-4 rounded-2xl hover:bg-black shadow-lg flex items-center justify-center gap-3 transition-all active:scale-95 uppercase tracking-wider text-xs">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    Review Bag Assets
+                </a>
+                
+                <a href="/" class="block text-zinc-400 font-bold hover:text-zinc-600 transition-colors uppercase text-xs tracking-[0.15em]">
+                    Return to Gallery
+                </a>
+            </div>
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
