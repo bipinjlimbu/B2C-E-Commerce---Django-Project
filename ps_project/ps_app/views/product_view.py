@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from ..models import Brand, Product, Wishlist
 
 @login_required
 def products_view(request):
     context = {}
     
+    search_query = request.GET.get('search', '')
     category = request.GET.get('category', 'all')
     brand_id = request.GET.get('brand', 'all')
     condition = request.GET.get('condition', 'all')
@@ -15,6 +17,9 @@ def products_view(request):
     
     products = Product.objects.all().order_by('-created_at')
     
+    if search_query:
+        products = products.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query) | Q(brand__name__icontains=search_query) | Q(category__icontains=search_query), is_active=True).order_by('-created_at')
+        
     if category and category != 'all':
         products = products.filter(category=category, is_active=True).order_by('-created_at')
         

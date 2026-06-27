@@ -740,8 +740,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100%;
 }
 
-.h-\[42px\] {
-  height: 42px;
+.h-\[46px\] {
+  height: 46px;
 }
 
 .h-2 {
@@ -754,10 +754,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-1 {
   height: 0.25rem;
-}
-
-.h-\[46px\] {
-  height: 46px;
 }
 
 .max-h-full {
@@ -2535,10 +2531,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-6 {
