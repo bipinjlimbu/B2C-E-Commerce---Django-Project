@@ -78,13 +78,13 @@
                                 <span>On the Way</span>
                             </div>
                         {% elif order.status == "delivered" %}
-                            <a href="/orders/completed/{{ order.id }}" class="bg-neutral-900 hover:bg-neutral-800 text-white font-black h-11 px-5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md whitespace-nowrap active:scale-95">
+                            <a href="/order/confirmed/{{ order.id }}" class="bg-neutral-900 hover:bg-neutral-800 text-white font-black h-11 px-5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md whitespace-nowrap active:scale-95">
                                 <i data-lucide="check-circle" class="w-3.5 h-3.5 text-green-400"></i>
                                 <span>Mark as Received</span>
                             </a>
                         {% endif %}
 
-                        <a href="/orders/cancel/{{ order.id }}" class="bg-neutral-50 hover:bg-red-50 border border-neutral-200 hover:border-red-200 text-neutral-400 hover:text-red-600 h-11 w-11 rounded-xl transition-all flex items-center justify-center active:scale-95" title="Abort Order Pipeline">
+                        <a href="/order/cancelled/{{ order.id }}" class="bg-neutral-50 hover:bg-red-50 border border-neutral-200 hover:border-red-200 text-neutral-400 hover:text-red-600 h-11 w-11 rounded-xl transition-all flex items-center justify-center active:scale-95" title="Abort Order Pipeline">
                             <i data-lucide="x-circle" class="w-4 h-4"></i>
                         </a>
                     </div>
