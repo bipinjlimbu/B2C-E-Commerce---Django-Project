@@ -20,11 +20,19 @@
                     <div class="flex flex-wrap items-center gap-3">
                         <span class="font-mono font-black text-base text-white">#ORDER-{{ order.id }}</span>
                         
-                        <span class="bg-amber-600 text-white font-black h-7 px-3 rounded-lg flex items-center justify-center text-[9px] uppercase tracking-widest select-none">
+                        <span class="text-xs text-neutral-600 font-mono">|</span>
+
+                        <span class="text-[10px] font-black uppercase tracking-widest 
+                            {% if order.status == 'paid' %} text-amber-400
+                            {% elif order.status == 'shipping' %} text-blue-400
+                            {% elif order.status == 'delivered' %} text-indigo-400
+                            {% elif order.status == 'cancelled' %} text-red-500
+                            {% else %} text-green-400 {% endif %}">
                             {{ order.get_status_display }}
                         </span>
 
-                        <span class="text-xs text-neutral-500 font-mono">| {{ order.created_at|date:"M d, Y" }}</span>
+                        <span class="text-xs text-neutral-600 font-mono">|</span>
+                        <span class="text-xs text-neutral-500 font-mono">{{ order.created_at|date:"M d, Y" }}</span>
                         <span class="text-xs text-neutral-400 font-medium">| Customer: <strong class="text-white">{{ order.customer.get_full_name }}</strong></span>
                     </div>
                     
@@ -72,17 +80,17 @@
                             <span>Mark as Delivered</span>
                         </a>
                         {% elif order.status == 'delivered' %}
-                        <div class="bg-green-600 text-white font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm select-none min-w-[110px]">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-white"></i>
+                        <div class="bg-neutral-900 border border-neutral-800 text-neutral-300 font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest select-none min-w-[110px]">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-indigo-400"></i>
                             <span>Awaiting Confirmation</span>
                         </div>
                         {% elif order.status == 'cancelled' %}
-                        <div class="bg-red-600 text-white font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm select-none min-w-[110px]">
+                        <div class="bg-red-600 text-white font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md select-none min-w-[110px]">
                             <i data-lucide="x-circle" class="w-4 h-4 text-white"></i>
                             <span>Order Cancelled</span>
                         </div>
                         {% else %}
-                        <div class="bg-green-600 text-white font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm select-none min-w-[110px]">
+                        <div class="bg-green-600 text-white font-black h-11 px-5 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md select-none min-w-[110px]">
                             <i data-lucide="check-circle" class="w-4 h-4 text-white"></i>
                             <span>Order Completed</span>
                         </div>
