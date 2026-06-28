@@ -5,35 +5,32 @@
     </div>
 
     <div class="space-y-4">
-        {% for i in "123456789123" %}
+        {% for order in orders %}
             <div class="bg-white border border-neutral-200 rounded-2xl p-6 min-h-[140px] flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:border-neutral-300 transition-all shadow-sm group">
                 
                 <div class="space-y-4 flex-grow w-full">
                     
                     <div class="flex flex-wrap items-center gap-3">
-                        <span class="font-mono font-black text-base text-neutral-900">#TK-407{{ forloop.counter }}</span>
-                        <span class="text-xs text-neutral-400 font-mono">| Registered: 2026-06-25 18:15</span>
+                        <span class="font-mono font-black text-base text-neutral-900">#TORDER-{{ order.id }}</span>
+                        <span class="text-xs text-neutral-400 font-mono">| Registered: {{ order.created_at }}</span>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-4xl">
                         
-                        <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
-                            <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
-                                <i data-lucide="camera" class="w-4 h-4 text-neutral-400"></i>
+                        {% for item in order.items.all %}
+                            <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
+                                <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
+                                    {% if order.items.first.product.product_image %}
+                                        <img src="{{ order.items.first.product.product_image.url }}" alt="{{ order.items.first.product.name }}" class="w-full h-full object-cover">
+                                    {% else %}
+                                        <i data-lucide="image" class="w-6 h-6 text-neutral-300"></i>
+                                    {% endif %}
+                                </div>
+                                <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
+                                    {{ order.items.first.product.name }} <span class="text-neutral-400 font-medium ml-1">× {{ order.items.first.quantity }}</span>
+                                </span>
                             </div>
-                            <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
-                                Sony Alpha 7 IV <span class="text-neutral-400 font-medium ml-1">× 1</span>
-                            </span>
-                        </div>
-
-                        <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
-                            <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
-                                <i data-lucide="layers" class="w-4 h-4 text-neutral-400"></i>
-                            </div>
-                            <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
-                                FE 24-70mm f/2.8 GM II <span class="text-neutral-400 font-medium ml-1">× {{ forloop.counter }}</span>
-                            </span>
-                        </div>
+                        {% endfor %}
 
                     </div>
                 </div>
@@ -44,14 +41,20 @@
                         <span class="text-[9px] uppercase font-bold tracking-wider text-neutral-400">Allocation Total</span>
                         <div class="flex items-baseline gap-0.5">
                             <span class="text-xs font-mono font-bold text-neutral-500">Rs.</span>
-                            <span class="text-base font-mono font-black text-neutral-900">1,85,000.00</span>
+                            <span class="text-base font-mono font-black text-neutral-900">{{ order.total_amount }}</span>
                         </div>
                     </div>
 
                     <div class="shrink-0">
-                        <div class="bg-green-600 text-white font-black h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest shadow-sm select-none min-w-[110px]">
-                            Delivered
-                        </div>
+                        {% if order.status == 'delivered' %}
+                            <div class="bg-green-600 text-white font-black h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest shadow-sm select-none min-w-[110px]">
+                                Delivered
+                            </div>
+                        {% else %}
+                            <div class="bg-red-600 text-white font-black h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest shadow-sm select-none min-w-[110px]">
+                                Cancelled
+                            </div>
+                        {% endif %}
                     </div>
                     
                 </div>
