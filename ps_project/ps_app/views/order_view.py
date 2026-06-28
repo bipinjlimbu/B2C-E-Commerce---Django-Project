@@ -9,16 +9,16 @@ def order_confirmed_view(request, order_id):
     
     if order.customer != request.user:
         messages.error(request, 'You are not authorized to view this order.')
-        return redirect('/dashboard/customer/?section=orders')
+        return redirect('/dashboard/?section=orders')
     
     if order.status == Order.Status.DELIVERED:
         order.status = Order.Status.COMPLETED
         order.save()
     else:
         messages.warning(request, 'Order is not yet delivered. Please wait for delivery confirmation.')
-        return redirect('/dashboard/customer/?section=pending-orders')
+        return redirect('/dashboard/?section=pending-orders')
     
-    return redirect('/dashboard/customer/?section=my-orders')
+    return redirect('/dashboard/?section=my-orders')
 
 @login_required
 def order_cancelled_view(request, order_id):
@@ -26,7 +26,7 @@ def order_cancelled_view(request, order_id):
     
     if order.customer != request.user:
         messages.error(request, 'You are not authorized to cancel this order.')
-        return redirect('/dashboard/customer/?section=orders')
+        return redirect('/dashboard/?section=orders')
     
     if order.status in [Order.Status.PAID, Order.Status.SHIPPING]:
         order.status = Order.Status.CANCELLED
@@ -41,4 +41,4 @@ def order_cancelled_view(request, order_id):
     else:
         messages.warning(request, 'Order cannot be cancelled at this stage.')
     
-    return redirect('/dashboard/customer/?section=my-orders')
+    return redirect('/dashboard/?section=my-orders')
