@@ -13,6 +13,10 @@ def admin_dashboard_view(request):
     
     context = {
         'section' : section,
+        'awaiting_dispatch_count' : Order.objects.filter(status=Order.Status.PAID).count(),
+        'awaiting_delivery_count' : Order.objects.filter(status=Order.Status.SHIPPING).count(),
+        'delivered_count' : Order.objects.filter(status=Order.Status.DELIVERED).count(),
+        'cancelled_count' : Order.objects.filter(status=Order.Status.CANCELLED).count()
     }
     
     if section == 'customer-list':
