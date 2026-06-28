@@ -19,3 +19,26 @@ def order_confirmed_view(request, order_id):
         return redirect('/dashboard/customer/?section=pending-orders')
     
     return redirect('/dashboard/customer/?section=my-orders')
+
+@login_required
+def order_cancelled_view(request, order_id):
+    order = Order.objects.filter(id=order_id).first()
+    
+    if order.customer != request.user:
+        messages.error(request, 'You are not authorized to cancel this order.')
+        return redirect('/dashboard/customer/?section=orders')
+    
+    if order.status in [Order.Status.PAID, Order.Status.SHIPPING]:
+        order.status = Order.Status.CANCELLED
+        order.save()
+        
+        for item in order.items.all():
+            product = item.product
+            product.stock += item.quantity
+            product.save()
+            
+        messages.success(request, 'Order has been cancelled successfully.')
+    else:
+        messages.warning(request, 'Order cannot be cancelled at this stage.')
+    
+    return redirect('/dashboard/customer/?section=my-orders')
