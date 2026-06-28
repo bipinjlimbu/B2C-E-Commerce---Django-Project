@@ -13,6 +13,7 @@ def admin_dashboard_view(request):
     
     context = {
         'section' : section,
+        'pending_orders_count' : Order.objects.filter(status__in=[Order.Status.PAID, Order.Status.SHIPPING]).count(),
         'awaiting_dispatch_count' : Order.objects.filter(status=Order.Status.PAID).count(),
         'awaiting_delivery_count' : Order.objects.filter(status=Order.Status.SHIPPING).count(),
         'delivered_count' : Order.objects.filter(status=Order.Status.DELIVERED).count(),
