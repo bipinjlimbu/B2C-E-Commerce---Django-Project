@@ -4,6 +4,23 @@ from django.contrib import messages
 from ..models import Order
 
 @login_required
+def order_dispatch_view(request, order_id):
+    order = Order.objects.filter(id=order_id).first()
+    
+    if not request.user.is_staff:
+        messages.error(request, 'You are not authorized to dispatch this order.')
+        return redirect('/dashboard/?section=order-fulfillment')
+    
+    if order.status == Order.Status.PAID:
+        order.status = Order.Status.SHIPPING
+        order.save()
+        messages.success(request, 'Order has been dispatched successfully.')
+    else:
+        messages.warning(request, 'Order cannot be dispatched at this stage.')
+    
+    return redirect('/dashboard/?section=order-fulfillment')
+
+@login_required
 def order_confirmed_view(request, order_id):
     order = Order.objects.filter(id=order_id).first()
     
