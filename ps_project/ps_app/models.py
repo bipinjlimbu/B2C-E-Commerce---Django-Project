@@ -78,9 +78,9 @@ class CartItem(models.Model):
 class Order(models.Model):
     class Status(models.TextChoices):
         PAID = 'paid', 'Payment Confirmed'
-        PROCESSING = 'processing', 'Packaging & Prep'
         SHIPPING = 'shipping', 'In Transit'
-        COMPLETED = 'completed', 'Delivered'
+        DELIVERED = 'delivered', 'Delivered'
+        COMPLETED = 'completed', 'Completed'
         CANCELLED = 'cancelled', 'Cancelled'
 
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
