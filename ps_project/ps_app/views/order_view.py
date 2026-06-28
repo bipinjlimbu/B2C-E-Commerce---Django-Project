@@ -9,7 +9,7 @@ def order_dispatch_view(request, order_id):
     
     if not request.user.is_staff:
         messages.error(request, 'You are not authorized to dispatch this order.')
-        return redirect('/dashboard/?section=order-fulfillment')
+        return redirect('/dashboard/admin/?section=order-fulfillment')
     
     if order.status == Order.Status.PAID:
         order.status = Order.Status.SHIPPING
@@ -18,7 +18,24 @@ def order_dispatch_view(request, order_id):
     else:
         messages.warning(request, 'Order cannot be dispatched at this stage.')
     
-    return redirect('/dashboard/?section=order-fulfillment')
+    return redirect('/dashboard/admin/?section=order-fulfillment')
+
+@login_required
+def order_deliver_view(request, order_id):
+    order = Order.objects.filter(id=order_id).first()
+    
+    if not request.user.is_staff:
+        messages.error(request, 'You are not authorized to mark this order as delivered.')
+        return redirect('/dashboard/admin/?section=order-fulfillment')
+    
+    if order.status == Order.Status.SHIPPING:
+        order.status = Order.Status.DELIVERED
+        order.save()
+        messages.success(request, 'Order has been marked as delivered successfully.')
+    else:
+        messages.warning(request, 'Order cannot be marked as delivered at this stage.')
+    
+    return redirect('/dashboard/admin/?section=order-fulfillment')
 
 @login_required
 def order_confirmed_view(request, order_id):
