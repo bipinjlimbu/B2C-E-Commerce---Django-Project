@@ -4,38 +4,59 @@
         <p class="text-2xl font-black tracking-tight text-neutral-900 uppercase">Purchase History Matrix</p>
     </div>
 
-    <div class="border border-neutral-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-neutral-50 border-b border-neutral-200 text-[10px] font-black uppercase tracking-widest text-neutral-500">
-                        <th class="p-4 sm:p-5">Order ID</th>
-                        <th class="p-4 sm:p-5">Timestamp</th>
-                        <th class="p-4 sm:p-5">Allocation Total</th>
-                        <th class="p-4 sm:p-5">Fulfillment Status</th>
-                        <th class="p-4 sm:p-5 text-right">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-neutral-100 text-xs font-medium text-neutral-700">
-                    {% for i in "123456789123" %}
-                        <tr class="hover:bg-neutral-50/80 transition-colors">
-                            <td class="p-4 sm:p-5 font-mono font-bold text-neutral-900">#TK-407{{ forloop.counter }}</td>
-                            <td class="p-4 sm:p-5 text-neutral-500">2026-06-25 18:15</td>
-                            <td class="p-4 sm:p-5 font-mono font-bold text-neutral-900">Rs. 1,85,000.00</td>
-                            <td class="p-4 sm:p-5">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-green-50 border border-green-200 text-green-700 text-[10px] font-black uppercase tracking-wider">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Delivered
-                                </span>
-                            </td>
-                            <td class="p-4 sm:p-5 text-right">
-                                <a href="/orders/407{{ forloop.counter }}/" class="inline-flex items-center gap-1 bg-neutral-900 hover:bg-neutral-800 text-white font-black px-3 py-2 rounded-xl text-[10px] uppercase tracking-widest transition-all">
-                                    <i data-lucide="eye" class="w-3 h-3"></i> Inspect
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="space-y-4">
+        {% for i in "123456789123" %}
+            <div class="bg-white border border-neutral-200 rounded-2xl p-6 min-h-[140px] flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:border-neutral-300 transition-all shadow-sm group">
+                
+                <div class="space-y-4 flex-grow w-full">
+                    
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="font-mono font-black text-base text-neutral-900">#TK-407{{ forloop.counter }}</span>
+                        <span class="text-xs text-neutral-400 font-mono">| Registered: 2026-06-25 18:15</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-4xl">
+                        
+                        <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
+                            <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
+                                <i data-lucide="camera" class="w-4 h-4 text-neutral-400"></i>
+                            </div>
+                            <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
+                                Sony Alpha 7 IV <span class="text-neutral-400 font-medium ml-1">× 1</span>
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
+                            <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
+                                <i data-lucide="layers" class="w-4 h-4 text-neutral-400"></i>
+                            </div>
+                            <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
+                                FE 24-70mm f/2.8 GM II <span class="text-neutral-400 font-medium ml-1">× {{ forloop.counter }}</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between lg:justify-end gap-6 border-t lg:border-t-0 border-neutral-100 pt-4 lg:pt-0 shrink-0 w-full lg:w-auto">
+                    
+                    <div class="flex flex-col lg:text-right">
+                        <span class="text-[9px] uppercase font-bold tracking-wider text-neutral-400">Allocation Total</span>
+                        <div class="flex items-baseline gap-0.5">
+                            <span class="text-xs font-mono font-bold text-neutral-500">Rs.</span>
+                            <span class="text-base font-mono font-black text-neutral-900">1,85,000.00</span>
+                        </div>
+                    </div>
+
+                    <div class="shrink-0">
+                        <div class="bg-green-600 text-white font-black h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest shadow-sm select-none min-w-[110px]">
+                            Delivered
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        {% endfor %}
     </div>
-</div>
+</div>  

@@ -875,6 +875,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 280px;
 }
 
+.min-w-\[110px\] {
+  min-width: 110px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -1538,6 +1542,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-neutral-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(163 163 163 / var(--tw-bg-opacity));
+}
+
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
 .bg-\[radial-gradient\(\#e5e7eb_1px\2c transparent_1px\)\] {
@@ -2751,6 +2760,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:block {
     display: block;
+  }
+
+  .lg\:w-auto {
+    width: auto;
   }
 
   .lg\:grid-cols-3 {
