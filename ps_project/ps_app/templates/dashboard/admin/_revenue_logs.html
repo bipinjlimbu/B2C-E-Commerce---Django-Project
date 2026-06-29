@@ -24,14 +24,14 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
-                    {% for i in "x"|rjust:"12" %}
+                    {% for log in revenue_logs %}
                         <tr class="hover:bg-neutral-900/30 transition-colors">
                             <td class="p-4 pl-6 align-middle">
-                                <span class="text-white block font-mono font-bold text-xs tracking-wider">TXN-859204719</span>
+                                <span class="text-white block font-mono font-bold text-xs tracking-wider">#ORDER-{{ log.id }}</span>
                             </td>
                             <td class="p-4 align-middle">
-                                <span class="text-white block font-bold">Bipin Limbu</span>
-                                <span class="text-[11px] font-mono text-neutral-500 block">@bipin7</span>
+                                <span class="text-white block font-bold">{{ log.customer.get_full_name|default:"N/A" }}</span>
+                                <span class="text-[11px] font-mono text-neutral-500 block">@{{ log.customer.username }}</span>
                             </td>
                             <td class="p-4 align-middle">
                                 <div class="flex items-center gap-1.5 text-xs font-mono text-neutral-200">
@@ -39,12 +39,12 @@
                                     <span>eSewa (Online Payment)</span>
                                 </div>
                             </td>
-                            <td class="p-4 align-middle font-mono text-sm text-green-400">+$2,499.99</td>
-                            <td class="p-4 pr-6 text-right align-middle font-mono text-xs text-neutral-500">2026-06-22 19:32</td>
+                            <td class="p-4 align-middle font-mono text-sm text-green-400">+Rs.{{ log.total_amount|floatformat:2 }}</td>
+                            <td class="p-4 pr-6 text-right align-middle font-mono text-xs text-neutral-500">{{ log.created_at|date:"Y-m-d H:i" }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-</div>x
+</div>
