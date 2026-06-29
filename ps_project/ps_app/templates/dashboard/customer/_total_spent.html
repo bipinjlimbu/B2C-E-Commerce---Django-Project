@@ -12,7 +12,7 @@
             <p class="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-2 italic">Gross Acquisition Value</p>
             <div class="flex items-baseline gap-1">
                 <span class="text-sm font-mono font-bold text-red-500">Rs.</span>
-                <span class="text-3xl font-mono font-black text-white">2,45,500.00</span>
+                <span class="text-3xl font-mono font-black text-white">{{ gross_spent | floatformat:2 }}</span>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <i data-lucide="package-check" class="w-16 h-16 text-neutral-900"></i>
             </div>
             <p class="text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-2 italic">Completed Cargo</p>
-            <span class="text-3xl font-mono font-black text-neutral-900">12</span>
+            <span class="text-3xl font-mono font-black text-neutral-900">{{ total_spent.count }}</span>
         </div>
 
         <div class="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm relative overflow-hidden group">
@@ -31,7 +31,7 @@
             <p class="text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-2 italic">Average Pipeline Valve</p>
             <div class="flex items-baseline gap-1">
                 <span class="text-sm font-mono font-bold text-neutral-500">Rs.</span>
-                <span class="text-3xl font-mono font-black text-neutral-900">20,458.33</span>
+                <span class="text-3xl font-mono font-black text-neutral-900">{{ average_spent | floatformat:2 }}</span>
             </div>
         </div>
     </div>
