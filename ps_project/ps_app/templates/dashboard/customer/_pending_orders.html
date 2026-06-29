@@ -79,7 +79,7 @@
                             </div>
                         {% elif order.status == "delivered" %}
                             <a href="/order/confirmed/{{ order.id }}" class="bg-neutral-900 hover:bg-neutral-800 text-white font-black h-11 px-5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md whitespace-nowrap active:scale-95">
-                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-green-400"></i>
+                                <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
                                 <span>Mark as Received</span>
                             </a>
                         {% endif %}
@@ -90,6 +90,14 @@
                     </div>
                 </div>
 
+            </div>
+        {% empty %}
+            <div class="flex flex-col items-center justify-center text-center p-12 bg-neutral-50 border border-dashed border-neutral-300 rounded-2xl min-h-[220px]">
+                <div class="w-12 h-12 rounded-xl bg-white border border-neutral-200 flex items-center justify-center mb-4 shadow-sm text-neutral-400">
+                    <i data-lucide="inbox" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-sm font-black text-neutral-900 uppercase tracking-wider mb-1">No Pending Operations</h3>
+                <p class="text-xs text-neutral-500 max-w-xs font-medium">The queue is fully processed. All active incoming pipelines have been cleared.</p>
             </div>
         {% endfor %}
     </div>
