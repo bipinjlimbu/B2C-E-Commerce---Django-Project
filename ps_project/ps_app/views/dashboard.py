@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db import models
 from ..models import User, Brand, Product, Order
 
 @login_required
@@ -18,7 +19,8 @@ def admin_dashboard_view(request):
         'awaiting_delivery_count' : Order.objects.filter(status=Order.Status.SHIPPING).count(),
         'delivered_count' : Order.objects.filter(status=Order.Status.DELIVERED).count(),
         'completed_count' : Order.objects.filter(status=Order.Status.COMPLETED).count(),
-        'cancelled_count' : Order.objects.filter(status=Order.Status.CANCELLED).count()
+        'cancelled_count' : Order.objects.filter(status=Order.Status.CANCELLED).count(),
+        'total_gross_revenue' : Order.objects.filter(status=Order.Status.COMPLETED).aggregate(total=models.Sum('total_amount'))['total'] or 0.00
     }
     
     if section == 'customer-list':
