@@ -115,7 +115,7 @@
                 </div>
                 <div class="flex flex-wrap items-center gap-4">
                     {% if user.is_authenticated and not user.is_staff %}
-                        <a href="/products/{{ product.id }}/review/" class="bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 hover:border-red-600 text-neutral-300 hover:text-white font-black px-5 py-3 rounded-2xl text-xs uppercase tracking-widest transition-all flex items-center gap-2">
+                        <a href="/review/add/{{ product.id }}" class="bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 hover:border-red-600 text-neutral-300 hover:text-white font-black px-5 py-3 rounded-2xl text-xs uppercase tracking-widest transition-all flex items-center gap-2">
                             <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-red-500"></i>
                             Submit Intelligence Report
                         </a>
