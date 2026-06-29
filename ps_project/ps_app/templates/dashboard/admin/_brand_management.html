@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td class="p-4 font-mono text-sm text-neutral-300">
-                                {{ brand.product_set.count|default:"0" }} Products
+                                {{ brand.product_count|default:"0" }} Products
                             </td>
                             <td class="p-4 font-mono text-xs text-neutral-500">
                                 {{ brand.created_at|date:"Y-m-d H:i" }}
