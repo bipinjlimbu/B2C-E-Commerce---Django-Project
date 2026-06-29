@@ -8,6 +8,7 @@ from .views.cart_view import add_to_cart_view, cart_view, increase_cart_item_qua
 from .views.wishlist_view import wishlist_view, wishlist_toggle_view, wishlist_remove_view
 from .views.payment_view import initiate_esewa_payment, payment_success_view, payment_failed_view
 from .views.order_view import order_dispatch_view, order_deliver_view, order_confirmed_view, order_cancelled_view
+from .views.review_view import add_review_view
 from .views.dashboard import admin_dashboard_view, customer_dashboard_view
 
 urlpatterns = [
@@ -42,6 +43,7 @@ urlpatterns = [
     path('order/deliver/<int:order_id>/', order_deliver_view, name='order_deliver'),
     path('order/confirmed/<int:order_id>/', order_confirmed_view, name='order_confirmed'),
     path('order/cancelled/<int:order_id>/', order_cancelled_view, name='order_cancelled'),
+    path('reviews/add/<int:product_id>/', add_review_view, name='add_review'),
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
