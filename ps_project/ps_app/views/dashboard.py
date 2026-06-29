@@ -17,6 +17,7 @@ def admin_dashboard_view(request):
         'awaiting_dispatch_count' : Order.objects.filter(status=Order.Status.PAID).count(),
         'awaiting_delivery_count' : Order.objects.filter(status=Order.Status.SHIPPING).count(),
         'delivered_count' : Order.objects.filter(status=Order.Status.DELIVERED).count(),
+        'completed_count' : Order.objects.filter(status=Order.Status.COMPLETED).count(),
         'cancelled_count' : Order.objects.filter(status=Order.Status.CANCELLED).count()
     }
     
