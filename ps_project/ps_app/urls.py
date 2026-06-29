@@ -43,7 +43,7 @@ urlpatterns = [
     path('order/deliver/<int:order_id>/', order_deliver_view, name='order_deliver'),
     path('order/confirmed/<int:order_id>/', order_confirmed_view, name='order_confirmed'),
     path('order/cancelled/<int:order_id>/', order_cancelled_view, name='order_cancelled'),
-    path('reviews/add/<int:product_id>/', add_review_view, name='add_review'),
+    path('review/add/<int:product_id>/', add_review_view, name='add_review'),
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
