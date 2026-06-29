@@ -13,42 +13,38 @@
 
     <div class="bg-black border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
+            <table class="w-full text-left border-collapse min-w-[800px]">
                 <thead>
                     <tr class="border-b border-neutral-800 text-[10px] font-bold uppercase tracking-widest text-neutral-400 bg-neutral-950/50">
-                        <th class="p-4 pl-6">Transaction Node</th>
-                        <th class="p-4">Associated Order</th>
-                        <th class="p-4">Customer Account</th>
-                        <th class="p-4">Settlement Pathway</th>
-                        <th class="p-4">Net Captured Value</th>
-                        <th class="p-4 pr-6 text-right">Timestamp</th>
+                        <th class="p-4 pl-6 w-[20%]">Order</th>
+                        <th class="p-4 w-[25%]">Customer Account</th>
+                        <th class="p-4 w-[25%]">Settlement Pathway</th>
+                        <th class="p-4 w-[15%]">Net Captured Value</th>
+                        <th class="p-4 pr-6 text-right w-[15%]">Timestamp</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-900 text-sm font-semibold text-neutral-300">
                     {% for i in "x"|rjust:"12" %}
                         <tr class="hover:bg-neutral-900/30 transition-colors">
-                            <td class="p-4 pl-6">
+                            <td class="p-4 pl-6 align-middle">
                                 <span class="text-white block font-mono font-bold text-xs tracking-wider">TXN-859204719</span>
                             </td>
-                            <td class="p-4">
-                                <span class="text-neutral-400 font-mono text-xs">#PX-94827</span>
-                            </td>
-                            <td class="p-4">
+                            <td class="p-4 align-middle">
                                 <span class="text-white block font-bold">Bipin Limbu</span>
                                 <span class="text-[11px] font-mono text-neutral-500 block">@bipin7</span>
                             </td>
-                            <td class="p-4">
+                            <td class="p-4 align-middle">
                                 <div class="flex items-center gap-1.5 text-xs font-mono text-neutral-200">
-                                    <i data-lucide="credit-card" class="w-3.5 h-3.5 text-neutral-500"></i>
-                                    eSewa / Card
+                                    <i data-lucide="credit-card" class="w-3.5 h-3.5 text-neutral-500 shrink-0"></i>
+                                    <span>eSewa (Online Payment)</span>
                                 </div>
                             </td>
-                            <td class="p-4 font-mono text-sm text-green-400">+$2,499.99</td>
-                            <td class="p-4 pr-6 text-right font-mono text-xs text-neutral-500">2026-06-22 19:32</td>
+                            <td class="p-4 align-middle font-mono text-sm text-green-400">+$2,499.99</td>
+                            <td class="p-4 pr-6 text-right align-middle font-mono text-xs text-neutral-500">2026-06-22 19:32</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+</div>x
