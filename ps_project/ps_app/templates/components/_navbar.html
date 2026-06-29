@@ -18,7 +18,7 @@
 
             <div class="flex-1 max-w-md mx-6 hidden sm:block">
                 <form action="/products/" method="GET" class="relative">
-                    <input type="text" name="search" placeholder="Search premium gear..." 
+                    <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Search premium gear..." 
                         class="w-full bg-neutral-50 border border-gray-300 rounded-xl pl-4 pr-9 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:bg-white transition-all">
                     <button type="submit" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-400 hover:text-red-600">
                         <i data-lucide="search" class="w-4 h-4"></i>
