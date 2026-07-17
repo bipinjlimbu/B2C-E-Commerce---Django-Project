@@ -26,3 +26,17 @@ def add_review_view(request, product_id):
         return redirect(f'/products/{product_id}/')
     
     return render(request, 'main/add_review_page.html', {'product': product})
+
+@login_required
+def delete_review_view(request, review_id):
+    review = Review.objects.filter(id=review_id).first()
+    if review:
+        review.delete()
+        messages.success(request, 'Review deleted successfully.')
+    else:
+        messages.error(request, 'Review not found or you do not have permission to delete it.')
+    
+    if request.user.is_staff:
+        return redirect('/dashboard/admin/?section=product-reviews')
+    else:
+        return redirect('/dashboard/?section=my-reviews')
