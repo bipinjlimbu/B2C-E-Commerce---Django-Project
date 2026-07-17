@@ -16,7 +16,7 @@
                         </div>
                         <div>
                             <h4 class="text-xs font-black text-neutral-900 uppercase">{{ review.product.name }}</h4>
-                            <p class="text-[10px] text-neutral-400 font-mono mt-0.5">Reviewed on: {{ review.created_at }} </p>
+                            <p class="text-[10px] text-neutral-400 font-mono mt-0.5">Reviewed on: {{ review.created_at | date:"Y-m-d" }} </p>
                         </div>
                     </div>
                     
