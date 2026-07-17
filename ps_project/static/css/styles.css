@@ -416,7 +416,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.translate-x-1, .-translate-y-1, .rotate-6, .transform, .hover\:scale-110, .active\:scale-95, .group-hover\:translate-x-1, .group-hover\:rotate-12, .group-hover\:scale-110, .group-hover\:scale-105, .peer-checked\:after\:translate-x-full::after {
+.translate-x-1, .-translate-y-1, .translate-x-\[120\%\], .rotate-6, .transform, .hover\:scale-110, .active\:scale-95, .group-hover\:translate-x-1, .group-hover\:rotate-12, .group-hover\:scale-110, .group-hover\:scale-105, .peer-checked\:after\:translate-x-full::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -492,8 +492,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 0;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
 .static {
   position: static;
+}
+
+.fixed {
+  position: fixed;
 }
 
 .absolute {
@@ -551,6 +563,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 1.5rem;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
+.right-5 {
+  right: 1.25rem;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -561,6 +589,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .z-10 {
   z-index: 10;
+}
+
+.z-\[100\] {
+  z-index: 100;
 }
 
 .col-span-full {
@@ -783,6 +815,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.25rem;
 }
 
+.h-\[3px\] {
+  height: 3px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -911,6 +947,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 800px;
 }
 
+.min-w-\[320px\] {
+  min-width: 320px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -970,6 +1010,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .-translate-y-1 {
   --tw-translate-y: -0.25rem;
+  transform: var(--tw-transform);
+}
+
+.translate-x-\[120\%\] {
+  --tw-translate-x: 120%;
   transform: var(--tw-transform);
 }
 
@@ -1583,6 +1628,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-neutral-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(163 163 163 / var(--tw-bg-opacity));
+}
+
+.bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+
+.bg-blue-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
 
 .bg-\[radial-gradient\(\#e5e7eb_1px\2c transparent_1px\)\] {
@@ -2292,6 +2347,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.ease-\[cubic-bezier\(0\.18\2c 0\.89\2c 0\.32\2c 1\.28\)\] {
+  transition-timing-function: cubic-bezier(0.18,0.89,0.32,1.28);
 }
 
 .\[background-size\:16px_16px\] {
