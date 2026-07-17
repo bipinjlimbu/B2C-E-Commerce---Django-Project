@@ -36,7 +36,7 @@ def admin_dashboard_view(request):
         context['orders'] = Order.objects.all().order_by('-created_at')
         
     elif section == 'product-reviews':
-        context['product_reviews'] = None
+        context['product_reviews'] = Review.objects.all().order_by('-created_at')
         
     elif section == 'revenue-logs':
         context['revenue_logs'] = Order.objects.filter(status = Order.Status.COMPLETED).order_by('-created_at')
