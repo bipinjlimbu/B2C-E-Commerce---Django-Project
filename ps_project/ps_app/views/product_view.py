@@ -215,6 +215,8 @@ def delete_product_view(request, product_id):
 
 def single_product_view(request, product_id):
     product = Product.objects.get(id=product_id)
+    reviews = product.reviews.all().order_by('-created_at')
+    
     if not product.is_active:
         messages.error(request, "This product is currently inactive.")
         return redirect('home')
@@ -224,4 +226,4 @@ def single_product_view(request, product_id):
     else:
         product.in_wishlist = False
         
-    return render(request, 'main/single_product_page.html', {'product': product})
+    return render(request, 'main/single_product_page.html', {'product': product, 'reviews': reviews})
