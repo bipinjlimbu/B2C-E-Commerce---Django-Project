@@ -122,13 +122,15 @@
                     {% endif %}
                     <div class="flex items-center gap-4 bg-neutral-950 border border-neutral-900 px-5 py-3 rounded-2xl">
                         <div class="flex text-red-500">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current text-neutral-800"></i>
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= product.average_rating %}
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                {% else %}
+                                    <i data-lucide="star" class="w-3.5 h-3.5"></i>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                        <span class="text-sm font-mono font-bold text-neutral-300">4.8 / 5.0 Rating</span>
+                        <span class="text-sm font-mono font-bold text-neutral-300">{{ product.average_rating }} / 5.0 Rating</span>
                     </div>
                 </div>
             </div>
