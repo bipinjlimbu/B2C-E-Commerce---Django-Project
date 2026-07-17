@@ -30,6 +30,26 @@ def add_review_view(request, product_id):
 @login_required
 def edit_review_view(request, review_id):
     review = Review.objects.filter(id=review_id, customer=request.user).first()
+    
+    errors = {}
+    if request.method == 'POST':
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+
+        if not rating:
+            errors['rating'] = 'Rating is required.'
+        if not comment:
+            errors['comment'] = 'Comment is required.'
+            
+        if errors:
+            return render(request, 'main/edit_review_page.html', {'review': review, 'errors': errors, 'data': request.POST})
+        
+        review.rating = rating
+        review.comment = comment
+        review.save()
+        messages.success(request, 'Review updated successfully.')
+        return redirect(f'/products/{review.product.id}/')
+    
     return render(request, 'main/edit_review_page.html', {'review': review})
 
 @login_required
