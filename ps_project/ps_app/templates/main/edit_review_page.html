@@ -25,7 +25,7 @@
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl">
                     <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-2">Adjust Rating</label>
                     <div class="flex items-center gap-1.5 bg-black border border-neutral-800 p-3 rounded-xl inline-flex">
-                        <input type="hidden" name="rating" id="id_rating" value="{{ review.rating|default:5 }}">
+                        <input type="hidden" name="rating" id="id_rating" {% if data %} value="{{ data.rating|default:5 }}" {% else %} value="{{ review.rating|default:5 }}" {% endif %}>
                         <div class="flex items-center gap-1">
                             <button type="button" data-star="1" class="star-btn text-neutral-700 hover:scale-110 transition-transform focus:outline-none">
                                 <i data-lucide="star" class="w-5 h-5"></i>
@@ -52,7 +52,7 @@
 
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl focus-within:border-red-600 transition-colors">
                     <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Modify Comment</label>
-                    <textarea id="id_comment" name="comment" rows="5" required placeholder="Update what you liked or disliked about this product..." class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 resize-none leading-relaxed">{{ review.comment|default:'' }}</textarea>
+                    <textarea id="id_comment" name="comment" rows="5" placeholder="Update what you liked or disliked about this product..." class="w-full bg-transparent text-sm font-semibold text-neutral-200 focus:outline-none placeholder-neutral-700 resize-none leading-relaxed">{% if data %}{{ data.comment|default:'' }}{% else %}{{ review.comment|default:'' }}{% endif %}</textarea>
                     {% if errors.comment %}
                         <p class="text-red-500 text-xs mt-1">{{ errors.comment }}</p>
                     {% endif %}
@@ -64,7 +64,7 @@
                     <i data-lucide="save" class="w-4 h-4"></i>
                     Update Review
                 </button>
-                <a href="{{ request.META.HTTP_REFERER }}" class="flex-grow sm:flex-none bg-neutral-900 hover:bg-neutral-800 text-neutral-200 font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-neutral-800">
+                <a href="javascript:history.back()" class="flex-grow sm:flex-none bg-neutral-900 hover:bg-neutral-800 text-neutral-200 font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-neutral-800">
                     Cancel
                 </a>
             </div>
