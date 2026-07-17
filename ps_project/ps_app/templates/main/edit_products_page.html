@@ -11,6 +11,8 @@
 
     {% include 'components/_navbar.html' %}
 
+    {% include 'components/_messages.html' %}
+
     <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <form method="POST" enctype="multipart/form-data" class="w-full max-w-4xl bg-black border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl p-8 lg:p-12 space-y-8">
             {% csrf_token %}
