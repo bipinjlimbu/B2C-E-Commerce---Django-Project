@@ -28,6 +28,11 @@ def add_review_view(request, product_id):
     return render(request, 'main/add_review_page.html', {'product': product})
 
 @login_required
+def edit_review_view(request, review_id):
+    review = Review.objects.filter(id=review_id, customer=request.user).first()
+    return render(request, 'main/edit_review_page.html', {'review': review})
+
+@login_required
 def delete_review_view(request, review_id):
     review = Review.objects.filter(id=review_id).first()
     if review:
