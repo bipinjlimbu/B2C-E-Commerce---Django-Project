@@ -5,6 +5,10 @@ from ..models import Review, Product
 
 @login_required
 def add_review_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, 'Staff members cannot add reviews.')
+        return redirect('/dashboard/admin/?section=product-reviews')
+    
     product = Product.objects.filter(id=product_id).first()
     
     errors = {}
@@ -31,6 +35,22 @@ def add_review_view(request, product_id):
 def edit_review_view(request, review_id):
     review = Review.objects.filter(id=review_id, customer=request.user).first()
     
+    if not review:
+        messages.error(request, 'Review not found or you do not have permission to edit it.')
+        return redirect('/dashboard/?section=my-reviews')
+    
+    if not request.user == review.customer:
+        messages.error(request, 'You do not have permission to edit this review.')
+        return redirect('/dashboard/?section=my-reviews')
+    
+    if not review.product:
+        messages.error(request, 'The product associated with this review does not exist.')
+        return redirect('/dashboard/?section=my-reviews')
+    
+    if request.user.is_staff:
+        messages.error(request, 'Staff members cannot edit reviews.')
+        return redirect('/dashboard/admin/?section=product-reviews')
+    
     errors = {}
     if request.method == 'POST':
         rating = request.POST.get('rating')
@@ -55,6 +75,19 @@ def edit_review_view(request, review_id):
 @login_required
 def delete_review_view(request, review_id):
     review = Review.objects.filter(id=review_id).first()
+    
+    if not review:
+        messages.error(request, 'Review not found.')
+        return redirect('/dashboard/?section=my-reviews')
+    
+    if not request.user == review.customer and not request.user.is_staff:
+        messages.error(request, 'You do not have permission to delete this review.')
+        return redirect('/dashboard/?section=my-reviews')
+    
+    if not review.product:
+        messages.error(request, 'The product associated with this review does not exist.')
+        return redirect('/dashboard/?section=my-reviews')
+    
     if review:
         review.delete()
         messages.success(request, 'Review deleted successfully.')
