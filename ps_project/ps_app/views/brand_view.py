@@ -5,6 +5,10 @@ from ..models import Brand
 
 @login_required
 def add_brand_view(request):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to add a brand.')
+        return redirect('/dashboard/admin/?section=brand-management')
+    
     errors = {}
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -29,6 +33,10 @@ def add_brand_view(request):
 
 @login_required
 def edit_brand_view(request, brand_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to edit a brand.')
+        return redirect('/dashboard/admin/?section=brand-management')
+    
     try:
         brand = Brand.objects.get(id=brand_id)
     except Brand.DoesNotExist:
@@ -61,6 +69,10 @@ def edit_brand_view(request, brand_id):
 
 @login_required
 def delete_brand_view(request, brand_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to delete a brand.')
+        return redirect('/dashboard/admin/?section=brand-management')
+    
     try:
         brand = Brand.objects.get(id=brand_id)
         brand.delete()
