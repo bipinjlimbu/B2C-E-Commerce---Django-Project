@@ -86,12 +86,17 @@ class Order(models.Model):
         DELIVERED = 'delivered', 'Delivered'
         COMPLETED = 'completed', 'Completed'
         CANCELLED = 'cancelled', 'Cancelled'
+        
+    class PaymentMethod(models.TextChoices):
+        ESEWA = 'esewa', 'Esewa'
+        COD = 'cod', 'Cash on Delivery'
 
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     total_amount = models.DecimalField(max_digits=12, decimal_places=2)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PAID)
     transaction_id = models.CharField(max_length=100, help_text="Payment provider tracking reference ID")
     shipping_address = models.TextField()
+    payment_method = models.CharField(max_length=20, choices=PaymentMethod.choices, default=PaymentMethod.ESEWA)
     created_at = models.DateTimeField(auto_now_add=True)
     
     @property
