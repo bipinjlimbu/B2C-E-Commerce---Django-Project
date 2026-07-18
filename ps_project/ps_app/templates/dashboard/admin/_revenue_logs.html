@@ -36,7 +36,7 @@
                             <td class="p-4 align-middle">
                                 <div class="flex items-center gap-1.5 text-xs font-mono text-neutral-200">
                                     <i data-lucide="credit-card" class="w-3.5 h-3.5 text-neutral-500 shrink-0"></i>
-                                    <span>eSewa (Online Payment)</span>
+                                    <span>{{ log.get_payment_method_display }}</span>
                                 </div>
                             </td>
                             <td class="p-4 align-middle font-mono text-sm text-green-400">+Rs.{{ log.total_amount|floatformat:2 }}</td>
