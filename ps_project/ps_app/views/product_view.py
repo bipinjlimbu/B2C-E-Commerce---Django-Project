@@ -57,6 +57,10 @@ def products_view(request):
 
 @login_required
 def add_product_view(request):
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to add a product.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
     brands = Brand.objects.all()
     
     errors = {}
@@ -126,6 +130,15 @@ def add_product_view(request):
 @login_required
 def edit_product_view(request, product_id):
     product = Product.objects.get(id=product_id)
+    
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to edit a product.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
+    if not product:
+        messages.error(request, "Product not found.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
     brands = Brand.objects.all()
     
     errors = {}
@@ -193,6 +206,10 @@ def edit_product_view(request, product_id):
 
 @login_required
 def is_active_toggle_view(request, product_id):
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to change product status.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
     try:
         product = Product.objects.get(id=product_id)
         product.is_active = not product.is_active
@@ -205,6 +222,10 @@ def is_active_toggle_view(request, product_id):
 
 @login_required
 def delete_product_view(request, product_id):
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to delete a product.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
     try:
         product = Product.objects.get(id=product_id)
         product.delete()
