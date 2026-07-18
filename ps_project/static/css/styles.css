@@ -579,6 +579,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 1.5rem;
 }
 
+.top-4 {
+  top: 1rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
 .z-\[100\] {
   z-index: 100;
 }
@@ -1935,6 +1943,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1rem;
 }
 
+.pr-16 {
+  padding-right: 4rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2614,6 +2630,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(254 202 202 / var(--tw-border-opacity));
 }
 
+.hover\:border-red-900\/50:hover {
+  border-color: rgb(127 29 29 / 0.5);
+}
+
 .hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -2796,6 +2816,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
+}
+
+.group:hover .group-hover\:opacity-0 {
+  opacity: 0;
 }
 
 .peer:checked ~ .peer-checked\:bg-red-600 {
