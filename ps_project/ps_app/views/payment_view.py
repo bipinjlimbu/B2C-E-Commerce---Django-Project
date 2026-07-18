@@ -11,6 +11,36 @@ import uuid
 def initiate_esewa_payment(request):
     if request.method == "POST":
         total_amount = request.POST.get('total_amount')
+        payment_method = request.POST.get('payment_method')
+        shipping_address = request.POST.get('shipping_address')
+                    
+        if payment_method != 'esewa':
+            order = Order.objects.create(
+                customer=request.user,
+                total_amount=total_amount,
+                transaction_id=str(uuid.uuid4()),
+                status=Order.Status.PAID,
+                shipping_address=shipping_address,
+                payment_method=Order.PaymentMethod.COD
+            )
+            order.save()
+            
+            cart_items = CartItem.objects.filter(cart__customer=request.user)
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product,
+                    price_at_purchase=item.product.price,
+                    quantity=item.quantity
+                )
+                
+                item.product.stock -= item.quantity
+                item.product.save()
+            
+            cart_items.delete()
+            messages.success(request, "Order placed successfully with Cash on Delivery.")
+            return redirect('/dashboard/?section=pending-orders')
+                
         
         # eSewa v2 is extremely strict: '100.0' and '100' create different hashes.
         # We ensure it matches the exact string that will be in the HTML form.
@@ -43,6 +73,7 @@ def initiate_esewa_payment(request):
         
         context = {
             'amount': total_amount,
+            'shipping_address': shipping_address,
             'transaction_uuid': transaction_uuid,
             'product_code': product_code,
             'signature': signature,
@@ -66,12 +97,14 @@ def payment_success_view(request):
     product_code = "EPAYTEST"
     transaction_uuid = decoded_data['transaction_uuid']
     total_amount = decoded_data['total_amount']
+    shipping_address = decoded_data.get('shipping_address', '')
     
     # FIXED URL: uat.esewa.com.np is dead. Use rc-epay.
     verify_url = "https://rc-epay.esewa.com.np/api/epay/transaction/status/"
     params = {
         'product_code': product_code,
         'total_amount': total_amount,
+        'shipping_address': shipping_address,
         'transaction_uuid': transaction_uuid
     }
     
@@ -98,7 +131,8 @@ def payment_success_view(request):
             total_amount=float(total_amount.replace(',', '')),
             transaction_id=transaction_uuid,
             status=Order.Status.PAID,
-            shipping_address=customer.address
+            shipping_address=shipping_address,
+            payment_method=Order.PaymentMethod.ESEWA
         )
         
         # 2. Move items from Cart to OrderItem

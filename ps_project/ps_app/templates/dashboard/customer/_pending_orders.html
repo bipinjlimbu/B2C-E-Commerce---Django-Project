@@ -15,7 +15,11 @@
                         
                         {% if order.status == 'paid' %}
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-black uppercase tracking-wider">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> {{ order.get_status_display }}
+                                {% if order.payment_method == 'esewa' %}
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> {{ order.get_status_display }}
+                                {% else %}
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Order Placed
+                                {% endif %}
                             </span>
                         {% elif order.status == 'processing' %}
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-black uppercase tracking-wider animate-pulse">
