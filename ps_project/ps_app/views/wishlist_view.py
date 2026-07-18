@@ -11,6 +11,11 @@ def wishlist_view(request):
 @login_required
 def wishlist_toggle_view(request, product_id):
     product = Product.objects.get(id=product_id)
+    
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot manage wishlists.")
+        return redirect('/dashboard/admin/')
+    
     if Wishlist.objects.filter(customer=request.user, product=product).exists():
         wishlist = Wishlist.objects.get(customer=request.user, product=product)
         wishlist.delete()
@@ -24,6 +29,11 @@ def wishlist_toggle_view(request, product_id):
 @login_required
 def wishlist_remove_view(request, product_id):
     product = Product.objects.get(id=product_id)
+    
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot manage wishlists.")
+        return redirect('/dashboard/admin/')
+    
     if Wishlist.objects.filter(customer=request.user, product=product).exists():
         wishlist = Wishlist.objects.get(customer=request.user, product=product)
         wishlist.delete()
