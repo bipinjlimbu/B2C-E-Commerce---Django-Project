@@ -11,7 +11,7 @@
                 <div class="space-y-4 flex-grow w-full">
                     
                     <div class="flex flex-wrap items-center gap-3">
-                        <span class="font-mono font-black text-base text-neutral-900">#TORDER-{{ order.id }}</span>
+                        <span class="font-mono font-black text-base text-neutral-900">#ORDER-{{ order.id }}</span>
                         <span class="text-xs text-neutral-400 font-mono">| Registered: {{ order.created_at }}</span>
                     </div>
                     
@@ -20,14 +20,14 @@
                         {% for item in order.items.all %}
                             <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200/60 p-2 rounded-xl">
                                 <div class="w-10 h-10 bg-white border border-neutral-200 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
-                                    {% if order.items.first.product.product_image %}
-                                        <img src="{{ order.items.first.product.product_image.url }}" alt="{{ order.items.first.product.name }}" class="w-full h-full object-cover">
+                                    {% if item.product.product_image %}
+                                        <img src="{{ item.product.product_image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover">
                                     {% else %}
                                         <i data-lucide="image" class="w-6 h-6 text-neutral-300"></i>
                                     {% endif %}
                                 </div>
                                 <span class="text-neutral-700 text-xs font-black tracking-tight truncate">
-                                    {{ order.items.first.product.name }} <span class="text-neutral-400 font-medium ml-1">× {{ order.items.first.quantity }}</span>
+                                    {{ item.product.name }} <span class="text-neutral-400 font-medium ml-1">× {{ item.quantity }}</span>
                                 </span>
                             </div>
                         {% endfor %}

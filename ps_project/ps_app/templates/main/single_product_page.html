@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }} | ApexStriker</title>
+    <title>{{ product.name }} | PixelShot</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
@@ -143,11 +143,13 @@
                 {% for review in reviews %}
                 <div class="bg-black border border-neutral-900 p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:border-neutral-800 transition-all relative group">
                     
-                    {% if review.customer == request.user %}
+                    {% if review.customer == request.user or request.user.is_staff %}
                         <div class="absolute top-4 right-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                            <a href="/review/edit/{{ review.id }}/" class="w-7 h-7 bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-lg flex items-center justify-center text-neutral-400 hover:text-white transition-colors" title="Edit Report">
-                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-                            </a>
+                            {% if review.customer == request.user %}
+                                <a href="/review/edit/{{ review.id }}/" class="w-7 h-7 bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-lg flex items-center justify-center text-neutral-400 hover:text-white transition-colors" title="Edit Report">
+                                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                                </a>
+                            {% endif %}
                             <a href="/review/delete/{{ review.id }}/" class="w-7 h-7 bg-neutral-950 hover:bg-red-950 border border-neutral-800 hover:border-red-900/50 rounded-lg flex items-center justify-center text-neutral-400 hover:text-red-500 transition-colors" title="Delete Report">
                                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                             </a>
